@@ -1,3 +1,8 @@
+## Book-A-Meal Frontend
+
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/615740efe04834716e99/maintainability)](https://codeclimate.com/github/Jpkat92/book-a-meal-frontend/maintainability)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
