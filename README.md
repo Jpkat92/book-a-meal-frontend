@@ -1,5 +1,6 @@
 ## Book-A-Meal Frontend
 
+[![Build Status](https://travis-ci.org/Jpkat92/book-a-meal-frontend.svg?branch=develop)](https://travis-ci.org/Jpkat92/book-a-meal-frontend)
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/615740efe04834716e99/maintainability)](https://codeclimate.com/github/Jpkat92/book-a-meal-frontend/maintainability)
 

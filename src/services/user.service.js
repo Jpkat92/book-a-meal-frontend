@@ -1,61 +1,46 @@
- export const userService = {
+import axios from 'axios';
+import { URL } from '../helpers/auth_header'
+
+
+export const userService = {
     signin,
     register,
+    signout
 };
 
-const URL = 'https://bookamealapi.herokuapp.com/api/v1'
-
 function signin(email, password) {
-    console.log(email)
-    console.log(password)
-    const requestOptions = {
-        method: 'POST',
-        mode: 'no-cors',
+    const data = JSON.stringify({ email, password })
+    const requestConfig = {
+        mode : "no-cors",
         headers: { 
                 'Content-Type': 'application/json'
-                },
-        body: JSON.stringify({ email, password })
-    };
- 
-    return fetch(`${URL}/auth/login/`, requestOptions)
-        .then(handleResponse)
-        .then(user => {
-            if (user.access_token) { 
-                localStorage.setItem('user', JSON.stringify(user));
+                }
+        };
+    debugger;
+    return axios.post(`${URL}/auth/login/`, data, requestConfig)
+        .then(response => {
+            debugger;
+            if (response.data.token) { 
+                localStorage.setItem('user', JSON.stringify(response.data));
             }
- 
-            return user;
-        });
+            return response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+          });
 }
+
 function register(user) {
-    const requestOptions = {
-        method: 'POST',
-        mode: 'no-cors',
+    const data = JSON.stringify(user)
+    const requestConfig= {
+        mode : "no-cors",
         headers: { 
-            'Content-Type': 'application/json'
-            },
-        body: JSON.stringify(user)
-    };
- 
-    return fetch(`${URL}/auth/register`, requestOptions).then(handleResponse);
-}
-
-function logout() {
-    localStorage.removeItem('user');
-}
-
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                logout();
+            'Content-Type': 'text/plain'
             }
- 
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
- 
-        return data;
-    });
+    };
+    return axios.post(`${URL}/auth/register`, data, requestConfig);
+}
+
+function signout() {
+    localStorage.removeItem('user');
 }

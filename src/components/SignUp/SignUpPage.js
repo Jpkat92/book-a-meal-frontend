@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs , Tab } from 'react-bootstrap';
-import { CatererSignUp } from '../CatererSignUp'
-import { CustomerSignUp } from '../CustomerSignUp'
+import { CatererSignUp } from './CatererSignUp'
+import { CustomerSignUp } from './CustomerSignUp'
 
 class SignUpPage extends Component {
     constructor(props, context) {
@@ -21,7 +21,7 @@ class SignUpPage extends Component {
         return (
             <div className="wrapper">
                 <div className="row">
-                    <div className="col-md-10">
+                    <div className="col-md-offset-3 col-md-6">
                         <div id="signup">
                             <div className="formBox"> 
                                 <Tabs activeKey={this.state.key}

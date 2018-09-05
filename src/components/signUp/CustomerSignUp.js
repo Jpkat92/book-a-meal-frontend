@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux';
-import { userActions } from '../actions/user.actions';
+import { userActions } from '../../actions/user.actions';
+import { alertActions } from '../../actions/alert.actions';
+import { history } from '../../helpers/history';
 
 class CustomerSignUp extends Component {
     constructor(props) {
@@ -9,16 +11,20 @@ class CustomerSignUp extends Component {
  
         this.state = {
             user: {
-                firstName: '',
-                lastName: '',
-                username: '',
+                first_name: '',
+                last_name: '',
+                user_name: '',
                 email: '',
                 password: '',
-                isCaterer: false
+                is_caterer: false
             },
             submitted: false
         };
- 
+        const { dispatch } = this.props;
+        history.listen((location, action) => {
+            dispatch(alertActions.clear());
+        });
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -40,39 +46,44 @@ class CustomerSignUp extends Component {
         this.setState({ submitted: true });
         const { user } = this.state;
         const { dispatch } = this.props;
-        if (user.firstName && user.lastName && user.username && user.email && user.password && user.isCaterer) {
+        
+        if (user.first_name && user.last_name && user.user_name && user.email && user.password) {
             dispatch(userActions.register(user));
+        }
+        else{
+            alert(JSON.stringify(user))
         }
     }
 
     render() {
+        const { registering  } = this.props;
         const { user, submitted } = this.state;
         return (
         <form id="customer" className="formContent" onSubmit={this.handleSubmit}>
             <div className="row">
-                <div className="col-sm-12"> 
+                <div className="col-md-12"> 
                     <h1>Customer Sign Up</h1>
                         <small>Please fill in this form to create an account</small>
                     </div>
                     <hr/>
                     <p className="col-sm-6 col-xs-12"> 
-                        <label htmlFor="firstname">First Name</label>
-                        <input type="text" placeholder="Enter First Name" name="firstName" value ={user.firstName} onChange={this.handleChange} required/>
-                        {submitted && !user.firstName &&
+                        <label htmlFor="first_name">First Name</label>
+                        <input type="text" placeholder="Enter First Name" name="first_name" value ={user.first_name} onChange={this.handleChange} required/>
+                        {submitted && !user.first_name &&
                             <div className="help-block">First name is required</div>
                         }
                     </p>
                     <p className="col-sm-6 col-xs-12"> 
-                        <label htmlFor="lastname">Last Name</label>
-                        <input type="text" placeholder="Enter Last Name" name="lastName" value ={user.lastName} onChange={this.handleChange} required/>
-                        {submitted && !user.lastName &&
+                        <label htmlFor="last_name">Last Name</label>
+                        <input type="text" placeholder="Enter Last Name" name="last_name" value ={user.last_name} onChange={this.handleChange} required/>
+                        {submitted && !user.last_name &&
                             <div className="help-block">Last name is required</div>
                         }
                     </p>  
                     <p className="col-sm-6 col-xs-12"> 
-                        <label htmlFor="username">Username</label>
-                        <input type="text" placeholder="Enter Username" name="username" value ={user.username} onChange={this.handleChange} required/>
-                        {submitted && !user.username &&
+                        <label htmlFor="user_name">Username</label>
+                        <input type="text" placeholder="Enter Username" name="user_name" value ={user.user_name} onChange={this.handleChange} required/>
+                        {submitted && !user.user_name &&
                             <div className="help-block">Username is required</div>
                         }
                     </p> 
@@ -90,18 +101,16 @@ class CustomerSignUp extends Component {
                             <div className="help-block">Password is required</div>
                         }
                     </p>
-                    {/* <p className="col-sm-6 col-xs-12">     
-                        <label htmlFor="psw-repeat">Repeat Password</label>
-                        <input type="password" placeholder="Repeat Password" name="psw-repeat" onChange={this.handleChange} required/>
-                    </p>  */}
                         <p className="col-sm-12">      
                             <label>
                             <input type="checkbox" name="remember" style={{'marginBottom':'15px'}}/> Remember me
                             </label>
                         </p>                      
                         <div className="col-sm-12 clearfix">
-                            <button type="button" className="cancelbtn">Cancel</button>
                             <button type="submit" className="signupbtn">Sign Up</button>
+                            {registering && 
+                            <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="  alt=" "/>
+                        }
                         </div>
 
                         <p className="col-sm-12 change_link">
@@ -115,8 +124,10 @@ class CustomerSignUp extends Component {
 }
 
 function mapStateToProps(state) {
-    const { registering } = state.authentication;
+    const { alert } = state;
+    const { registering } = state.registration;
     return {
+        alert,
         registering
     };
 }
