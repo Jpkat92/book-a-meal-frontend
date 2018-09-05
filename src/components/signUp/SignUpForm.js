@@ -1,102 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux';
-import { userActions } from '../../actions/user.actions';
-import { alertActions } from '../../actions/alert.actions';
-import { history } from '../../helpers/history';
 
-class CustomerSignUp extends Component {
-    constructor(props) {
-        super(props);
- 
-        this.state = {
-            user: {
-                first_name: '',
-                last_name: '',
-                user_name: '',
-                email: '',
-                password: '',
-                is_caterer: false
-            },
-            submitted: false
-        };
-        const { dispatch } = this.props;
-        history.listen((location, action) => {
-            dispatch(alertActions.clear());
-        });
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
- 
-    handleChange(event) {
-        const { name, value } = event.target;
-        const { user } = this.state;
-        this.setState({
-            user: {
-                ...user,
-                [name]: value
-            }
-        });
-    }
- 
-    handleSubmit(event) {
-        event.preventDefault();
- 
-        this.setState({ submitted: true });
-        const { user } = this.state;
-        const { dispatch } = this.props;
-        
-        if (user.first_name && user.last_name && user.user_name && user.email && user.password) {
-            dispatch(userActions.register(user));
-        }
-        else{
-            alert(JSON.stringify(user))
-        }
-    }
-
-    render() {
-        const { registering  } = this.props;
-        const { user, submitted } = this.state;
+const SignUpForm = ({user, adminRole, submitted, registering, handleClick, onInputChange}) => {
+        debugger;
         return (
-        <form id="customer" className="formContent" onSubmit={this.handleSubmit}>
+        <form className="formContent" onSubmit={evt => handleClick(evt, adminRole)}>
             <div className="row">
                 <div className="col-md-12"> 
-                    <h1>Customer Sign Up</h1>
+                    <h1>
+                    {adminRole ? (<span>Caterer</span>) : (<span>Customer</span>)} Sign Up
+                    </h1>
                         <small>Please fill in this form to create an account</small>
                     </div>
                     <hr/>
                     <p className="col-sm-6 col-xs-12"> 
-                        <label htmlFor="first_name">First Name</label>
-                        <input type="text" placeholder="Enter First Name" name="first_name" value ={user.first_name} onChange={this.handleChange} required/>
-                        {submitted && !user.first_name &&
+                        <label htmlFor="firstName">First Name</label>
+                        <input type="text" placeholder="Enter First Name" name="firstName" value ={user.firstName} onChange={onInputChange} required/>
+                        {submitted && !user.firstName &&
                             <div className="help-block">First name is required</div>
                         }
                     </p>
                     <p className="col-sm-6 col-xs-12"> 
-                        <label htmlFor="last_name">Last Name</label>
-                        <input type="text" placeholder="Enter Last Name" name="last_name" value ={user.last_name} onChange={this.handleChange} required/>
-                        {submitted && !user.last_name &&
+                        <label htmlFor="lastName">Last Name</label>
+                        <input type="text" placeholder="Enter Last Name" name="lastName" value ={user.lastName} onChange={onInputChange} required/>
+                        {submitted && !user.lastName &&
                             <div className="help-block">Last name is required</div>
                         }
                     </p>  
                     <p className="col-sm-6 col-xs-12"> 
-                        <label htmlFor="user_name">Username</label>
-                        <input type="text" placeholder="Enter Username" name="user_name" value ={user.user_name} onChange={this.handleChange} required/>
-                        {submitted && !user.user_name &&
+                        <label htmlFor="userName">Username</label>
+                        <input type="text" placeholder="Enter Username" name="userName" value ={user.userName} onChange={onInputChange} required/>
+                        {submitted && !user.userName &&
                             <div className="help-block">Username is required</div>
                         }
                     </p> 
                     <p className="col-sm-6 col-xs-12"> 
                         <label htmlFor="email">Email</label>
-                        <input type="text" placeholder="Enter Email" name="email"  value ={user.email} onChange={this.handleChange} required/>
+                        <input type="text" placeholder="Enter Email" name="email"  value ={user.email} onChange={onInputChange} required/>
                         {submitted && !user.email &&
                             <div className="help-block">Email is required</div>
                         }
                     </p> 
                     <p className="col-sm-6 col-xs-12">     
                         <label htmlFor="psw">Password</label>
-                        <input type="password" placeholder="Enter Password" name="password"  value ={user.password} onChange={this.handleChange} required/>
+                        <input type="password" placeholder="Enter Password" name="password"  value ={user.password} onChange={onInputChange} required/>
                         {submitted && !user.password &&
                             <div className="help-block">Password is required</div>
                         }
@@ -120,17 +67,6 @@ class CustomerSignUp extends Component {
                     </div>
                 </form>
         );
-    }
-}
-
-function mapStateToProps(state) {
-    const { alert } = state;
-    const { registering } = state.registration;
-    return {
-        alert,
-        registering
     };
-}
- 
-const connectedSignUpPage = connect(mapStateToProps)(CustomerSignUp);
-export { connectedSignUpPage as CustomerSignUp };
+
+export default SignUpForm;

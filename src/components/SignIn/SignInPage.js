@@ -42,8 +42,7 @@ class SignInPage extends Component {
             <div className="wrapper">
                 <div className="row">
                     <div className="col-md-offset-3 col-md-6">
-                        <div id="signin">
-                            <div className="formBox">
+                        <div className="formBox">
                             <form id="customer" className="formContent" onSubmit={this.handleSubmit}>
                                 <div className="row">
                                     <div className="col-md-12"> 
@@ -81,7 +80,6 @@ class SignInPage extends Component {
                                     </div>    
                                 </div>
                             </form>
-                            </div>
                         </div>
                     </div>
                 </div>
