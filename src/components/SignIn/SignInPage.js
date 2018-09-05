@@ -1,40 +1,86 @@
 import React, { Component } from 'react';
-import { Tabs , Tab } from 'react-bootstrap';
-import { CatererSignIn } from '../CatererSignIn'
-import { CustomerSignIn } from '../CustomerSignIn'
+import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
+import { userActions } from '../../actions/user.actions';
 
 class SignInPage extends Component {
     constructor(props, context) {
         super(props, context);
-    
-        this.handleSelect = this.handleSelect.bind(this);
-    
+
         this.state = {
-          key: 1
+            email: '',
+            password: '',
+            submitted: false
         };
-      }
-    
-      handleSelect(key) {
-        this.setState({ key });
-      }
+
+        this.props.dispatch(userActions.signout());
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+ 
+        this.setState({ submitted: true });
+        const { email, password } = this.state;
+        const { dispatch } = this.props;
+        if (email && password) {
+            dispatch(userActions.signin(email, password));
+        }
+    }
       
     render() {
+        const { signingIn } = this.props;
+        const { email, password, submitted } = this.state;
         return (
             <div className="wrapper">
                 <div className="row">
-                    <div className="col-md-10">
+                    <div className="col-md-offset-3 col-md-6">
                         <div id="signin">
-                            <div className="formBox"> 
-                                <Tabs activeKey={this.state.key}
-                                        onSelect={this.handleSelect}
-                                        id="sign-in-tabs">
-                                    <Tab eventKey={1} title="Customer">
-                                        <CustomerSignIn />
-                                    </Tab>
-                                    <Tab eventKey={2} title="Caterer">
-                                        <CatererSignIn />
-                                    </Tab>
-                                </Tabs>
+                            <div className="formBox">
+                            <form id="customer" className="formContent" onSubmit={this.handleSubmit}>
+                                <div className="row">
+                                    <div className="col-md-12"> 
+                                    <h1>Sign in</h1> 
+                                        <p><small>Fill your credentials to proceed</small></p>
+                                        <hr/>
+                                        <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
+                                            <label  className="col-sm-6 col-xs-12" htmlFor="email"> Email </label>
+                                            <input className="col-sm-6 col-xs-12" name="email" value ={email} required="required" type="text" onChange={this.handleChange} placeholder="your email..."/>
+                                            {submitted && !email &&
+                                            <div className="help-block">Email is required</div>
+                                            }
+                                        </div>
+                                        <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
+                                            <label className="col-sm-6 col-xs-12" htmlFor="password"> Password </label>
+                                            <input className="col-sm-6 col-xs-12" name="password" value ={password} required="required" type="password" onChange={this.handleChange} placeholder="..." /> 
+                                            {submitted && !password &&
+                                                <div className="help-block">Password is required</div>
+                                            }
+                                        </div>
+                                        <div className="form-group">
+                                            <input  className="col-sm-6" type="checkbox" name="keeploggedin" value="keeploggedin" /> 
+                                            <label  className="col-sm-6" htmlFor="keeploggedin">Keep me logged in</label>
+                                        </div>
+                                        <div className="form-group">
+                                            <button type="submit" className="indexbtn">Sign In</button>
+                                            {signingIn &&
+                                                <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt=""/>
+                                            }
+                                            <p className="col-sm-12 change_link">
+                                                Not a user yet ?
+                                                <Link to="/signup"> Sign up</Link>
+                                            </p>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -43,5 +89,12 @@ class SignInPage extends Component {
         );
     }
   }
-
-export default SignInPage;
+  function mapStateToProps(state) {
+    const { signingIn } = state.authentication;
+    return {
+        signingIn
+    };
+}
+ 
+const connectedSignInPage = connect(mapStateToProps)(SignInPage);
+export { connectedSignInPage as SignInPage };
