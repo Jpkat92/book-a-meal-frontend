@@ -1,6 +1,11 @@
-import { authHeader } from '../helpers/auth_header';
+import { authHeader, URL } from '../helpers/auth_header';
 
-const URL = 'https://bookamealapi.herokuapp.com/api/v1'
+export const mealService = {
+    getAllMeals,
+    createMeal,
+    updateMeal,
+    deleteMeal
+};
 
 function getAllMeals() {
     const requestOptions = {
@@ -8,21 +13,54 @@ function getAllMeals() {
         headers: authHeader()
     };
  
-    return fetch(`${URL}/meals`, requestOptions).then(handleResponse);
-}
+    return fetch(`${URL}/meals`, requestOptions)
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            console.log(error);
+            throw(error);
+        });
+    };
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                logout();
-            }
+function createMeal(meal) {
+    const requestConfig = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify(meal)
+    };
  
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
- 
-        return data;
-    });
-}
+    return fetch(`${URL}/meals`, requestConfig).then(response => {
+        return response.json();
+    }).catch(error => {
+            throw(error);
+        });
+    };
+
+function updateMeal(id, name, price) {
+    const requestConfig = {
+        method: 'PUT',
+        headers: authHeader(),
+        body: JSON.stringify({name,price})
+    };
+    debugger;
+    return fetch(`${URL}/meals/${id}`, requestConfig).then(response => {
+        debugger;
+        return response.json();
+    }).catch(error => {
+            console.log(error);
+        });
+    };
+
+function deleteMeal(id) {
+    const requestConfig = {
+        method: 'DELETE',
+        headers: authHeader()
+    };
+    
+    return fetch(`${URL}/meals/${id}`, requestConfig).then(response => {
+        return response.json();
+    }).catch(error => {
+            throw(error);
+        });
+    };
