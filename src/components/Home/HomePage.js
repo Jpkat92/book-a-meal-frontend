@@ -7,7 +7,7 @@ import { orderActions } from '../../actions/order.actions';
 import { alertActions } from '../../actions/alert.actions';
 import { userActions } from '../../actions/user.actions';
 import OrderList from '../orders/OrderList';
-import { getTodaysMenu, makeItemsUnchecked } from '../common/utils';
+import { getTodaysMenu, makeItemsUnchecked, updateCheckedItems } from '../common/utils';
 
 class HomePage extends Component {
     constructor(props){
@@ -18,10 +18,11 @@ class HomePage extends Component {
             menu: this.props.menu,
             orders: this.props.orders,
             user: this.props.user,
-            selectedMeals: []
+            selectedMeals: [],
+            selectedOrders: []
         }
-        this.redirectToManageOrderPage = this.redirectToManageOrderPage.bind(this);
         this.placeOrder = this.placeOrder.bind(this);
+        this.deleteOrders = this.deleteOrders.bind(this);
         this.onOrderChecked = this.onOrderChecked.bind(this);
         this.onMealChecked = this.onMealChecked.bind(this);
     }
@@ -43,76 +44,68 @@ class HomePage extends Component {
     }
 
     onMealChecked(event, mealId){
-        let { selectedMeals } = this.state;
+        let { menu, selectedMeals } = this.state;
         let meal = this.state.menu.mealList.filter(meal => meal.id === mealId)
-        switch(event.target.checked){
-            case true:
-                meal[0].isChecked = true
-                selectedMeals.push(mealId);
-                break;
-           case false:
-                meal[0].isChecked = false
-                selectedMeals.pop(mealId);
-                break;
-           default:
-                break;
-        }
-        let { menu } = this.state
         menu = {
-            day: menu.day,
-            mealIds : menu.mealIds,
-            mealList : [
-                ...menu.mealList.filter(meal => meal.id !== mealId),
-                meal[0]
-            ]
+            ...menu,
+            mealList : [...menu.mealList.filter(meal => meal.id !== mealId),meal[0]]
         }
-        this.setState({menu});
-        this.setState({selectedMeals});
+        this.setState({
+            menu,
+            selectedMeals: updateCheckedItems(event, mealId, selectedMeals)
+        });
+    }
+
+    onOrderChecked(event, orderId){
+        let { selectedOrders } = this.state;
+        this.setState({
+            selectedOrders : updateCheckedItems(event, orderId, selectedOrders)
+        });
     }
 
     placeOrder(event){
         event.preventDefault();
         let { selectedMeals } = this.state;
-        alert(`Order Placed for ${selectedMeals}`)
         for (let i = 0; i < selectedMeals.length; i++) {
             this.props.createOrder(selectedMeals[i]);
         }
         history.push("/")
     }
 
-    onOrderChecked(event, orderId){
-
-    }
-
-    redirectToManageOrderPage() {
-        history.push('/orders/');
+    deleteOrders(event){
+        event.preventDefault();
+        const {selectedOrders} = this.state;
+        if (selectedOrders.length > 0){
+            for (let i = 0; i < selectedOrders.length; i++) {
+                this.props.deleteOrder(selectedOrders[i]);
+            }
+            history.push("/")
+        }
     }
  
     render() {
-        const isAdmin = this.props.user.isAdmin
-        const { menu } = this.state
-        const { orders } = this.state
-        const menuMeals = menu.mealList
+        const { menu, orders, user } = this.state
         debugger;
         return (
                 <div className="wrapper">
                 <div className="jumbotron">
-                    <h1>Welcome to Book-A-Meal</h1>
-                    <p>Order your favourite meals hassle free!</p>
+                    <h1 style={{'color':'#337ab7'}}>Welcome to Book-A-Meal</h1>
+                    <p><em>Order your favourite meals hassle free!</em></p>
                 </div>
-                <div className="mainContent">
+                <div className="col-md-10">
+                    <div className="mainContent">
                         <MenuList 
-                            menu={this.state.menu}
-                            meals={menuMeals}
+                            menu={menu}
+                            meals={menu.mealList}
                             toggleMeal={this.onMealChecked}
                             onClickButton={this.placeOrder}
-                            isAdmin={isAdmin}/>
+                            isAdmin={user.isAdmin}/>
                         <OrderList 
                             orders={orders}
                             changingOrder={false}
                             onToggleOrder={this.onOrderChecked}
-                            onClickButton={this.redirectToManageOrderPage}
-                            isAdmin={isAdmin}/> 
+                            onClickButton={this.deleteOrders}/> 
+                </div>
                 </div>
             </div>
             );
@@ -124,7 +117,6 @@ class HomePage extends Component {
         const { user } = authentication;
         const { menus } = state
         const { orders } = state
-        debugger;
         let menu = {
             "day": {},
             "mealIds": [],
@@ -135,7 +127,6 @@ class HomePage extends Component {
             menu = getTodaysMenu(menus);
         }
         menu.mealList = makeItemsUnchecked(menu.mealList);
-        debugger;
         return {
             user,
             menu,

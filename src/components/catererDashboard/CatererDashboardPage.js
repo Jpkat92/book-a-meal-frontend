@@ -100,8 +100,9 @@ class CatererDashboardPage extends Component {
         let { selectedMeals } = this.state;
         selectedMeals = selectedMeals.concat(this.state.menu.mealIds)
         if (selectedMeals.length > 0){
-            debugger;
-            this.props.updateMenu(this.state.menu.day.id, selectedMeals);
+            const todayId = new Date().getDay();
+            this.props.updateMenu(todayId, selectedMeals);
+            console.log(selectedMeals)
             history.push("/dashboard")
             this.props.success(`${selectedMeals.length} meal(s) added to today's menu`)
         }
@@ -128,6 +129,7 @@ class CatererDashboardPage extends Component {
 
     render() {
         const {meals, orders, menu, user} = this.state
+        debugger;
         return (
             <div className="wrapper">
                 <div className="row">

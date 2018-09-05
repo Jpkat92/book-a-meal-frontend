@@ -31,7 +31,16 @@ function signin(email, password) {
 }
 
 function register(user) {
-    const data = JSON.stringify(user)
+    const data = JSON.stringify(
+        {
+            first_name: user.firstName,
+            last_name: user.lastName,
+            user_name: user.userName,
+            email: user.email,
+            password: user.password,
+            is_caterer: user.isCaterer
+       }
+    )
     const requestConfig= {
         mode : "no-cors",
         headers: { 

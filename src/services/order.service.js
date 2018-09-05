@@ -1,28 +1,65 @@
-import { authHeader } from '../helpers/auth_header';
+import { authHeader, URL } from '../helpers/auth_header';
 
-const URL = 'https://bookamealapi.herokuapp.com/api/v1'
+export const orderService = {
+    getAllOrders,
+    createOrder,
+    updateOrder,
+    deleteOrder
+};
 
 function getAllOrders() {
     const requestOptions = {
         method: 'GET',
         headers: authHeader()
     };
- 
-    return fetch(`${URL}/orders`, requestOptions).then(handleResponse);
-}
+    debugger;
+    return fetch(`${URL}/orders`, requestOptions)
+        .then(response => {
+            return response.json();
+        })
+        .catch(error => {
+            throw(error);
+        });
+    };
 
-function handleResponse(response) {
-    return response.text().then(text => {
-        const data = text && JSON.parse(text);
-        if (!response.ok) {
-            if (response.status === 401) {
-                logout();
-            }
+function createOrder(mealId) {
+    const requestOptions = {
+        method: 'POST',
+        headers: authHeader(),
+        body: JSON.stringify({
+            meal_id : mealId
+        })
+    };
+    debugger;
+    return fetch(`${URL}/orders/`, requestOptions).then(response => {
+        return response.json();
+    }).catch(error => {
+            throw(error);
+        });
+    };
+
+function updateOrder(id) {
+    const requestOptions = {
+        method: 'PUT',
+        headers: authHeader()
+    };
  
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
- 
-        return data;
-    });
-}
+    return fetch(`${URL}/orders/${id}`, requestOptions).then(response => {
+        return response.json();
+    }).catch(error => {
+            throw(error);
+        });
+    };
+
+function deleteOrder(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: authHeader()
+    };
+    debugger;
+    return fetch(`${URL}/orders/${id}`, requestOptions).then(response => {
+        return response.json();
+    }).catch(error => {
+            throw(error);
+        });
+    };
