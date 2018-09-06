@@ -10,6 +10,14 @@ describe('initial_state', () => {
     });
   });
 
+const initial_state_ = [
+    {
+        "id": 7,
+        "name": "Chicken Tikka",
+        "price": 15
+    }
+]
+
 describe('Loading meals request', () => {
     test('it returns loading meal status', () => {
         const action = {
@@ -53,13 +61,7 @@ describe('Load meals failure', () => {
 
 describe('Create a meal', () => {
     test('it returns meals with new meal', () => {
-        const initial_state = [
-            {
-                "id": 7,
-                "name": "Chicken Tikka",
-                "price": 15
-            }
-        ]
+
         const action = {
             type: mealConstants.CREATE_MEAL_SUCCESS,
             meal: 
@@ -70,11 +72,11 @@ describe('Create a meal', () => {
                 }
         };
         const expectedState =  [
-                    ...initial_state,
+                    ...initial_state_,
                     Object.assign({}, action.meal)
                 ];
     
-        expect(meals(initial_state, action)).toEqual(expectedState);
+        expect(meals(initial_state_, action)).toEqual(expectedState);
       });
 });
 
@@ -92,13 +94,7 @@ describe('Create meal failure', () => {
 
 describe('Update a meal', () => {
     test('it returns meals with an updated meal', () => {
-        const initial_state = [
-            {
-                "id": 7,
-                "name": "Chicken Tikka",
-                "price": 15
-            }
-        ]
+        
         const action = {
             type: mealConstants.UPDATE_MEAL_SUCCESS,
             meal: 
@@ -109,12 +105,12 @@ describe('Update a meal', () => {
             }
         };
         const expectedState =  [
-                    ...initial_state.filter(
+                    ...initial_state_.filter(
                         meal => meal.id !== action.meal.id),
                     Object.assign({}, action.meal)
                 ];
     
-        expect(meals(initial_state, action)).toEqual(expectedState);
+        expect(meals(initial_state_, action)).toEqual(expectedState);
       });
 });
 
@@ -139,41 +135,29 @@ describe('Update a meal failure', () => {
 
 describe('Delete a meal', () => {
     test('it returns meals removing deleted meal', () => {
-        const initial_state = [
-            {
-                "id": 7,
-                "name": "Chicken Tikka",
-                "price": 15
-            }
-        ]
+        
         const action = {
             type: mealConstants.DELETE_MEAL_SUCCESS,
             id: 7
         };
         const expectedState =  [
-                    ...initial_state.filter(
+                    ...initial_state_.filter(
                         meal => meal.id !== action.id)
                 ];
     
-        expect(meals(initial_state, action)).toEqual(expectedState);
+        expect(meals(initial_state_, action)).toEqual(expectedState);
       });
 });
 
 describe('Delete a meal failure', () => {
     test('it fails to delete a meal', () => {
-        const initial_state = [
-            {
-                "id": 7,
-                "name": "Chicken Tikka",
-                "price": 15
-            }
-        ]
+        
         const action = {
             type: mealConstants.DELETE_MEAL_FAILURE,
             error : "Failed to delete a meal"
         };
-        const expectedState =  initial_state;
+        const expectedState =  initial_state_;
     
-        expect(meals(initial_state, action)).toEqual(expectedState);
+        expect(meals(initial_state_, action)).toEqual(expectedState);
       });
 });

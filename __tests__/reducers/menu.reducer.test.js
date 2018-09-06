@@ -1,6 +1,18 @@
 import { menus } from '../../src/reducers/menu.reducer';
 import { menuConstants } from '../../src/constants/menu.constants';
 
+const initial_state = [
+    {
+        "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
+        "day": {
+            "id": 3,
+            "name": "Wednesday"
+        },
+        "mealIds": [],
+        "mealList": []
+    }
+]
+
 describe('initial_state', () => {
     test('is correct', () => {
       const action = { type: 'fake_action' };
@@ -94,17 +106,7 @@ describe('Load menus failure', () => {
 
 describe('Create menu success', () => {
     test('it returns all menus with new menu', () => {
-        const initial_state = [
-            {
-                "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
-                "day": {
-                    "id": 3,
-                    "name": "Wednesday"
-                },
-                "mealIds": [],
-                "mealList": []
-            }
-        ]
+        
         const action = {
             type: menuConstants.CREATE_MENU_SUCCESS,
             menu: {
@@ -148,17 +150,7 @@ describe('Create menu success', () => {
 
 describe('Create menu failure', () => {
     test('it fails to create a menu', () => {
-        const initial_state = [
-            {
-                "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
-                "day": {
-                    "id": 3,
-                    "name": "Wednesday"
-                },
-                "mealIds": [],
-                "mealList": []
-            }
-        ]
+        
         const action = {
             type: menuConstants.CREATE_MENU_FAILURE,
             error : "Failed to create a menu"
@@ -171,17 +163,7 @@ describe('Create menu failure', () => {
 
 describe('Update menu success', () => {
     test('it returns all menus with updated menu', () => {
-        const initial_state = [
-            {
-                "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
-                "day": {
-                    "id": 3,
-                    "name": "Wednesday"
-                },
-                "mealIds": [],
-                "mealList": []
-            }
-        ]
+        
         const action = {
             type: menuConstants.UPDATE_MENU_SUCCESS,
             menu: {
@@ -225,17 +207,7 @@ describe('Update menu success', () => {
 
 describe('Update menu failure', () => {
     test('it fails to update a menu', () => {
-        const initial_state = [
-            {
-                "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
-                "day": {
-                    "id": 3,
-                    "name": "Wednesday"
-                },
-                "mealIds": [],
-                "mealList": []
-            }
-        ]
+        
         const action = {
             type: menuConstants.UPDATE_MENU_FAILURE,
             error : "Failed to update menu"

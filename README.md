@@ -1,10 +1,4 @@
-## Book-A-Meal Frontend
-
-[![Build Status](https://travis-ci.org/Jpkat92/book-a-meal-frontend.svg?branch=develop)](https://travis-ci.org/Jpkat92/book-a-meal-frontend)
-
-[![Coverage Status](https://coveralls.io/repos/github/Jpkat92/book-a-meal-frontend/badge.svg?branch=develop)](https://coveralls.io/github/Jpkat92/book-a-meal-frontend?branch=develop)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/615740efe04834716e99/maintainability)](https://codeclimate.com/github/Jpkat92/book-a-meal-frontend/maintainability)
+# Book-A-Meal Frontend [![Build Status](https://travis-ci.org/Jpkat92/book-a-meal-frontend.svg?branch=develop)](https://travis-ci.org/Jpkat92/book-a-meal-frontend) [![Coverage Status](https://coveralls.io/repos/github/Jpkat92/book-a-meal-frontend/badge.svg?branch=develop)](https://coveralls.io/github/Jpkat92/book-a-meal-frontend?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/615740efe04834716e99/maintainability)](https://codeclimate.com/github/Jpkat92/book-a-meal-frontend/maintainability)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
