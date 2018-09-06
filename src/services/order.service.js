@@ -38,7 +38,7 @@ function createOrder(mealId) {
         });
     };
 
-function updateOrder(id) {
+function updateOrder(id, order) {
     const requestOptions = {
         method: 'PUT',
         headers: authHeader()

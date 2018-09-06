@@ -12,4 +12,4 @@ export function authHeader() {
     }
 }
 
-export const URL = 'http://localhost:5000/api/v1'
+export const URL = 'https://bookamealapi.herokuapp.com/api/v1'
