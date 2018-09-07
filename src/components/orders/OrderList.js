@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import OrderListRow from './OrderListRow'
-import DeleteOrderBtn from '../common/deleteOrderBtn'
+import DeleteOrderBtn from '../common/forms/deleteOrderBtn'
 
 const OrderList = ({orders, onToggleOrder, onClickButton, changingOrder}) => {  
     return (

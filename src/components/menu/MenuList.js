@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import MenuListRow from './MenuListRow'
-import PlaceOrderBtn from '../common/placeOrderBtn'
-import SetupMenuBtn from '../common/setupMenuBtn'
+import PlaceOrderBtn from '../common/forms/placeOrderBtn'
+import SetupMenuBtn from '../common/forms/setupMenuBtn'
 
 const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal}) => {
     let menuButton;
@@ -18,7 +18,8 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal}) => {
             <div className="header">
                 <h2 style={{'margin':'5px'}}>Daily Menu</h2>                 
             </div>
-            {meals.length > 0 ?
+            <br/>
+            {typeof meals != 'undefined' && meals.length > 0 ?
                 (<form>
                     <br/>
                     {menuButton}
@@ -54,7 +55,12 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal}) => {
                     }
                 </form>
                 ):
-            (<div className="well">Add meals first before setting up daily menu</div>)
+            (<div className="well">
+                { isAdmin ? 
+                    ('Add meals first before setting up daily menu'):
+                    ('No menu available for today')
+                }    
+                </div>)
             }
         </div>
     );

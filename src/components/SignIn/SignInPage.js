@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux';
 import { userActions } from '../../actions/user.actions';
+import TextFormInput from '../common/forms/textFormInput'
 
 class SignInPage extends Component {
     constructor(props, context) {
@@ -49,20 +50,8 @@ class SignInPage extends Component {
                                     <h1>Sign in</h1> 
                                         <p><small>Fill your credentials to proceed</small></p>
                                         <hr/>
-                                        <div className={'form-group' + (submitted && !email ? ' has-error' : '')}>
-                                            <label  className="col-sm-6 col-xs-12" htmlFor="email"> Email </label>
-                                            <input className="col-sm-6 col-xs-12" name="email" value ={email} required="required" type="text" onChange={this.handleChange} placeholder="your email..."/>
-                                            {submitted && !email &&
-                                            <div className="help-block">Email is required</div>
-                                            }
-                                        </div>
-                                        <div className={'form-group' + (submitted && !password ? ' has-error' : '')}>
-                                            <label className="col-sm-6 col-xs-12" htmlFor="password"> Password </label>
-                                            <input className="col-sm-6 col-xs-12" name="password" value ={password} required="required" type="password" onChange={this.handleChange} placeholder="..." /> 
-                                            {submitted && !password &&
-                                                <div className="help-block">Password is required</div>
-                                            }
-                                        </div>
+                                        <TextFormInput name="email" value={email} submitStatus={submitted} type="text" handleOnChange={this.handleChange}/> 
+                                        <TextFormInput name="password" value={password} submitStatus={submitted} type="password" handleOnChange={this.handleChange}/> 
                                         <div className="form-group">
                                             <input  className="col-sm-6" type="checkbox" name="keeploggedin" value="keeploggedin" /> 
                                             <label  className="col-sm-6" htmlFor="keeploggedin">Keep me logged in</label>
@@ -73,8 +62,8 @@ class SignInPage extends Component {
                                                 <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt=""/>
                                             }
                                             <p className="col-sm-12 change_link">
-                                                Not a user yet ?
-                                                <Link to="/signup"> Sign up</Link>
+                                                Are you a first time user ?
+                                                <Link to="/signup"> Sign up here</Link>
                                             </p>
                                         </div>
                                     </div>    

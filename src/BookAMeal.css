@@ -9,7 +9,6 @@ body {
   }
 
 .wrapper {
-    /* width: 100%; */
     min-height: 800px;
     position: relative;
     padding:40px;

@@ -1,6 +1,6 @@
 import React from 'react';
-import TextInput from '../common/textInput';
-import NumberInput from '../common/numberInput';
+import TextInput from '../common/forms/textInput';
+import NumberInput from '../common/forms/numberInput';
 
 const MealForm = ({meal, onSave, onChange, saving, errors}) => {
   return (

@@ -1,7 +1,6 @@
 import React from 'react';
-import TextInput from '../common/textInput';
-import NumberInput from '../common/numberInput';
-import SelectInput from '../common/selectInput';
+import NumberInput from '../common/forms/numberInput';
+import SelectInput from '../common/forms/selectInput';
 
 const OrderForm = ({order, allMenuMeals, onSave, onChange, saving, errors}) => {
   return (

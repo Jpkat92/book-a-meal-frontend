@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
-import CheckBoxInput from '../common/checkBoxInput'
+import CheckBoxInput from '../common/forms/checkBoxInput'
 
 const MealListRow = ({meal, toggleCheckBoxChange}) => {
   return (

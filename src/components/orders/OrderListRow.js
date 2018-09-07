@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import CheckBoxInput from '../common/checkBoxInput'
+import CheckBoxInput from '../common/forms/checkBoxInput'
 
 const OrderListRow = ({order, toggleCheckBoxChange}) => {
   return (

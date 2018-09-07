@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectInput from '../common/selectInput';
+import SelectInput from '../common/forms/selectInput';
 import MealCheckboxList from './MealCheckboxList';
 
 const MenuForm = ({menu, meals, allDays, onCreateMenu, onMealToggle, selectedDay, onSelectDay, creating, errors}) => {
