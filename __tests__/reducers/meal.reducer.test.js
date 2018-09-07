@@ -3,10 +3,10 @@ import { mealConstants } from '../../src/constants/meal.constants';
 
 describe('initial_state', () => {
     test('is correct', () => {
-      const action = { type: 'fake_action' };
+      const mealAction = { type: 'fake_action' };
       const initialState = [];
   
-      expect(meals(undefined, action)).toEqual(initialState);
+      expect(meals(undefined, mealAction)).toEqual(initialState);
     });
   });
 
@@ -20,18 +20,18 @@ const initial_state_ = [
 
 describe('Loading meals request', () => {
     test('it returns loading meal status', () => {
-        const action = {
+        const mealAction = {
             type: mealConstants.LOAD_MEALS_REQUEST
         };
         const expectedState =  [];
     
-        expect(meals(undefined, action)).toEqual(expectedState);
+        expect(meals(undefined, mealAction)).toEqual(expectedState);
       });
 });
 
 describe('Load meals successful', () => {
     test('it returns meals', () => {
-        const action = {
+        const mealAction = {
             type: mealConstants.LOAD_MEALS_SUCCESS,
             meals: [
                 {
@@ -41,28 +41,28 @@ describe('Load meals successful', () => {
                 }
             ] 
         };
-        const expectedState =  action.meals;
+        const expectedState =  mealAction.meals;
     
-        expect(meals(undefined, action)).toEqual(expectedState);
+        expect(meals(undefined, mealAction)).toEqual(expectedState);
       });
 });
 
 describe('Load meals failure', () => {
     test('fails to return meals', () => {
-        const action = { 
+        const mealAction = { 
             type: mealConstants.LOAD_FAILURE, 
             error : "Failed to fetch meals"
         };
         const expectedState = [];
     
-        expect(meals(undefined, action)).toEqual(expectedState);
+        expect(meals(undefined, mealAction)).toEqual(expectedState);
       });
 });
 
 describe('Create a meal', () => {
     test('it returns meals with new meal', () => {
 
-        const action = {
+        const mealAction = {
             type: mealConstants.CREATE_MEAL_SUCCESS,
             meal: 
                 {
@@ -73,29 +73,29 @@ describe('Create a meal', () => {
         };
         const expectedState =  [
                     ...initial_state_,
-                    Object.assign({}, action.meal)
+                    Object.assign({}, mealAction.meal)
                 ];
     
-        expect(meals(initial_state_, action)).toEqual(expectedState);
+        expect(meals(initial_state_, mealAction)).toEqual(expectedState);
       });
 });
 
 describe('Create meal failure', () => {
     test('fails to create a meal', () => {
-        const action = { 
+        const mealAction = { 
             type: mealConstants.LOAD_FAILURE, 
             error : "Failed to create meal"
         };
         const expectedState = [];
     
-        expect(meals(undefined, action)).toEqual(expectedState);
+        expect(meals(undefined, mealAction)).toEqual(expectedState);
       });
 });
 
 describe('Update a meal', () => {
     test('it returns meals with an updated meal', () => {
         
-        const action = {
+        const mealAction = {
             type: mealConstants.UPDATE_MEAL_SUCCESS,
             meal: 
             {
@@ -106,11 +106,11 @@ describe('Update a meal', () => {
         };
         const expectedState =  [
                     ...initial_state_.filter(
-                        meal => meal.id !== action.meal.id),
-                    Object.assign({}, action.meal)
+                        meal => meal.id !== mealAction.meal.id),
+                    Object.assign({}, mealAction.meal)
                 ];
     
-        expect(meals(initial_state_, action)).toEqual(expectedState);
+        expect(meals(initial_state_, mealAction)).toEqual(expectedState);
       });
 });
 
@@ -123,29 +123,29 @@ describe('Update a meal failure', () => {
                 "price": 15
             }
         ]
-        const action = {
+        const mealAction = {
             type: mealConstants.UPDATE_MEAL_FAILURE,
             error : "Failed to update a meal"
         };
         const expectedState =  initial_state;
     
-        expect(meals(initial_state, action)).toEqual(expectedState);
+        expect(meals(initial_state, mealAction)).toEqual(expectedState);
       });
 });
 
 describe('Delete a meal', () => {
     test('it returns meals removing deleted meal', () => {
         
-        const action = {
+        const mealAction = {
             type: mealConstants.DELETE_MEAL_SUCCESS,
             id: 7
         };
         const expectedState =  [
                     ...initial_state_.filter(
-                        meal => meal.id !== action.id)
+                        meal => meal.id !== mealAction.id)
                 ];
     
-        expect(meals(initial_state_, action)).toEqual(expectedState);
+        expect(meals(initial_state_, mealAction)).toEqual(expectedState);
       });
 });
 

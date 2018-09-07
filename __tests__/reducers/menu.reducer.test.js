@@ -15,27 +15,27 @@ const initial_state = [
 
 describe('initial_state', () => {
     test('is correct', () => {
-      const action = { type: 'fake_action' };
+      const menuAction = { type: 'fake_menuAction' };
       const initialState = [];
   
-      expect(menus(undefined, action)).toEqual(initialState);
+      expect(menus(undefined, menuAction)).toEqual(initialState);
     });
 });
 
 describe('Loading menus request', () => {
     test('it returns loading menu status', () => {
-        const action = {
+        const menuAction = {
             type: menuConstants.LOAD_MENU_REQUEST
         };
         const expectedState =  [];
     
-        expect(menus(undefined, action)).toEqual(expectedState);
+        expect(menus(undefined, menuAction)).toEqual(expectedState);
       });
 });
 
 describe('Load menus successful', () => {
     test('it returns all menus', () => {
-        const action = {
+        const menuAction = {
             type: menuConstants.LOAD_MENU_SUCCESS,
             menus: [
                 {
@@ -86,28 +86,28 @@ describe('Load menus successful', () => {
                 }
             ] 
         };
-        const expectedState =  action.menus;
+        const expectedState =  menuAction.menus;
     
-        expect(menus(undefined, action)).toEqual(expectedState);
+        expect(menus(undefined, menuAction)).toEqual(expectedState);
       });
 });
 
 describe('Load menus failure', () => {
     test('fails to return menus', () => {
-        const action = { 
+        const menuAction = { 
             type: menuConstants.LOAD_MENU_FAILURE, 
             error : "Failed to fetch menus"
         };
         const expectedState = [];
     
-        expect(menus(undefined, action)).toEqual(expectedState);
+        expect(menus(undefined, menuAction)).toEqual(expectedState);
       });
 });
 
 describe('Create menu success', () => {
     test('it returns all menus with new menu', () => {
         
-        const action = {
+        const menuAction = {
             type: menuConstants.CREATE_MENU_SUCCESS,
             menu: {
                     "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
@@ -140,31 +140,31 @@ describe('Create menu success', () => {
                 }
         };
         const expectedState =  [
-            ...initial_state.filter(menu => menu.day.id !== action.menu.day.id),
-            Object.assign({}, action.menu)
+            ...initial_state.filter(menu => menu.day.id !== menuAction.menu.day.id),
+            Object.assign({}, menuAction.menu)
         ];
     
-        expect(menus(initial_state, action)).toEqual(expectedState);
+        expect(menus(initial_state, menuAction)).toEqual(expectedState);
       });
 });
 
 describe('Create menu failure', () => {
     test('it fails to create a menu', () => {
         
-        const action = {
+        const menuAction = {
             type: menuConstants.CREATE_MENU_FAILURE,
             error : "Failed to create a menu"
         };
         const expectedState =  initial_state;
     
-        expect(menus(initial_state, action)).toEqual(expectedState);
+        expect(menus(initial_state, menuAction)).toEqual(expectedState);
       });
 });
 
 describe('Update menu success', () => {
     test('it returns all menus with updated menu', () => {
         
-        const action = {
+        const menuAction = {
             type: menuConstants.UPDATE_MENU_SUCCESS,
             menu: {
                     "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
@@ -197,23 +197,23 @@ describe('Update menu success', () => {
                 }
         };
         const expectedState =  [
-            ...initial_state.filter(menu => menu.day.id !== action.menu.day.id),
-            Object.assign({}, action.menu)
+            ...initial_state.filter(menu => menu.day.id !== menuAction.menu.day.id),
+            Object.assign({}, menuAction.menu)
         ];
     
-        expect(menus(initial_state, action)).toEqual(expectedState);
+        expect(menus(initial_state, menuAction)).toEqual(expectedState);
       });
 });
 
 describe('Update menu failure', () => {
     test('it fails to update a menu', () => {
         
-        const action = {
+        const menuAction = {
             type: menuConstants.UPDATE_MENU_FAILURE,
             error : "Failed to update menu"
         };
         const expectedState =  initial_state;
     
-        expect(menus(initial_state, action)).toEqual(expectedState);
+        expect(menus(initial_state, menuAction)).toEqual(expectedState);
       });
 });
