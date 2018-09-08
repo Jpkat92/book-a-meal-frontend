@@ -106,7 +106,37 @@ describe('Load menus failure', () => {
 
 describe('Create menu success', () => {
     test('it returns all menus with new menu', () => {
-        
+        const initial_state =[ 
+            {
+                "dateCreated": "Tue, 04 Sep 2018 11:38:16 GMT",
+                "day": {
+                    "id": 3,
+                    "name": "Wednesday"
+                },
+                "mealIds": [
+                    7,
+                    8,
+                    9
+                ],
+                "mealList": [
+                {
+                    "id": 7,
+                    "name": "Chicken Tikka",
+                    "price": 15
+                },
+                {
+                    "id": 8,
+                    "name": "Biryani Rice",
+                    "price": 10
+                },
+                {
+                    "id": 9,
+                    "name": "Chicken Curry",
+                    "price": 18
+                }
+            ]
+            }
+        ]
         const menuAction = {
             type: menuConstants.CREATE_MENU_SUCCESS,
             menu: {
@@ -144,7 +174,7 @@ describe('Create menu success', () => {
             Object.assign({}, menuAction.menu)
         ];
     
-        expect(menus(initial_state, menuAction)).toEqual(expectedState);
+        expect(menus(undefined, menuAction)).toEqual(expectedState);
       });
 });
 
