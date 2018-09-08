@@ -7,7 +7,7 @@ import { meals } from './meal.reducer';
 import { orders } from './order.reducer';
 import { menus } from './menu.reducer';
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
   authentication,
   registration,
   alert,
@@ -15,5 +15,12 @@ const rootReducer = combineReducers({
   menus,
   meals
 });
+
+const rootReducer = (state, action) => {
+  if (action.type === 'USER_SIGNOUT') {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
 
 export default rootReducer;

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { URL } from '../helpers/auth_header'
 
-
 export const userService = {
     signin,
     register,
@@ -16,10 +15,8 @@ function signin(email, password) {
                 'Content-Type': 'application/json'
                 }
         };
-    debugger;
     return axios.post(`${URL}/auth/login/`, data, requestConfig)
         .then(response => {
-            debugger;
             if (response.data.token) { 
                 localStorage.setItem('user', JSON.stringify(response.data));
             }

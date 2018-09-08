@@ -1,4 +1,5 @@
 import { authHeader, URL } from '../helpers/auth_header';
+import handleResponse from '../helpers/responseHandler';
 
 export const orderService = {
     getAllOrders,
@@ -12,28 +13,25 @@ function getAllOrders() {
         method: 'GET',
         headers: authHeader()
     };
-    debugger;
     return fetch(`${URL}/orders`, requestOptions)
-        .then(response => {
-            return response.json();
-        })
+        .then(handleResponse)
         .catch(error => {
             throw(error);
         });
     };
 
-function createOrder(mealId) {
+function createOrder(mealId, catererId) {
     const requestOptions = {
         method: 'POST',
         headers: authHeader(),
         body: JSON.stringify({
-            meal_id : mealId
+            meal_id : mealId,
+            caterer_id : catererId
         })
     };
-    debugger;
-    return fetch(`${URL}/orders/`, requestOptions).then(response => {
-        return response.json();
-    }).catch(error => {
+    return fetch(`${URL}/orders/`, requestOptions)
+        .then(handleResponse)
+        .catch(error => {
             throw(error);
         });
     };
@@ -56,7 +54,6 @@ function deleteOrder(id) {
         method: 'DELETE',
         headers: authHeader()
     };
-    debugger;
     return fetch(`${URL}/orders/${id}`, requestOptions).then(response => {
         return response.json();
     }).catch(error => {

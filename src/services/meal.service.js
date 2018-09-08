@@ -1,4 +1,5 @@
 import { authHeader, URL } from '../helpers/auth_header';
+import handleResponse from '../helpers/responseHandler'
 
 export const mealService = {
     getAllMeals,
@@ -14,9 +15,10 @@ function getAllMeals() {
     };
  
     return fetch(`${URL}/meals`, requestOptions)
-        .then(response => {
-            return response.json();
-        })
+        .then(handleResponse)
+        // .then(response => {
+        //     return response.json();
+        // })
         .catch(error => {
             console.log(error);
             throw(error);
@@ -30,9 +32,12 @@ function createMeal(meal) {
         body: JSON.stringify(meal)
     };
  
-    return fetch(`${URL}/meals`, requestConfig).then(response => {
-        return response.json();
-    }).catch(error => {
+    return fetch(`${URL}/meals`, requestConfig)
+    .then(handleResponse)
+    // .then(response => {
+    //     return response.json();
+    // })
+    .catch(error => {
             throw(error);
         });
     };
@@ -43,9 +48,7 @@ function updateMeal(id, name, price) {
         headers: authHeader(),
         body: JSON.stringify({name,price})
     };
-    debugger;
     return fetch(`${URL}/meals/${id}`, requestConfig).then(response => {
-        debugger;
         return response.json();
     }).catch(error => {
             console.log(error);
