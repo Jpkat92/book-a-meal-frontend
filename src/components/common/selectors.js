@@ -16,3 +16,13 @@ export function daysFormattedForDropdown(days) {
         };
     });
 }
+
+export function caterersFormattedForDropdown(caterers){
+    return caterers.map(item => {
+        return {
+            id: item.caterer.id,
+            name: item.caterer.firstName+" "+item.caterer.lastName,
+            menu: item.caterer.menu
+        };
+    });
+}

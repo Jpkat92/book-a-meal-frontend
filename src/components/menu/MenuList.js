@@ -1,27 +1,47 @@
 import React from "react";
 import PropTypes from 'prop-types'
 import MenuListRow from './MenuListRow'
+import { caterersFormattedForDropdown } from '../common/selectors'
+import SelectInput from '../common/forms/selectInput';
 import PlaceOrderBtn from '../common/forms/placeOrderBtn'
 import SetupMenuBtn from '../common/forms/setupMenuBtn'
 
-const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal}) => {
-    let menuButton;
+const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal, onSelectCaterer, caterer, allCaterers}) => {
+    let menuButton, catererList, message, label;
+    
     if (isAdmin){
         menuButton = <SetupMenuBtn onSetupMenu={onClickButton}/>
     }
     else {
         menuButton = <PlaceOrderBtn onClickOrder={onClickButton}/>
+        catererList = caterersFormattedForDropdown(allCaterers)
+        if (!caterer.id) {
+            message = 'No caterer is selected'
+            label = 'Select a caterer'
+        }
+        else{
+            message = 'No menu set for today'
+            label = caterer.firstName+" "+caterer.lastName
+        }
     }
-    debugger;
     return (
         <div id="menu-list" className="col-md-4">
             <div className="header">
-                <h2 style={{'margin':'5px'}}>Daily Menu</h2>                 
+                <h2 style={{'margin':'5px'}}>Daily Menu</h2>               
             </div>
-            <br/>
-            {typeof meals != 'undefined' && meals.length > 0 ?
+            { isAdmin ? (<p></p>) :
+                    (<form>
+                        <SelectInput
+                            label=""
+                            name="caterer"
+                            value={caterer.id}
+                            defaultOption={label}
+                            options={catererList}
+                            onChange={onSelectCaterer}/>
+                    </form>)
+                } 
+            {typeof meals !== 'undefined' && meals.length > 0 ?
                 (<form>
-                    <br/>
                     {menuButton}
                     <hr/>
                     {Array.isArray(menu.mealList) && menu.mealList.length === 0 ?
@@ -30,7 +50,7 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal}) => {
                                 No meals on today's menu
                             </div>
                         ):
-                        (
+                        (   
                             <table className="table">
                             <thead>
                             <tr>
@@ -54,13 +74,13 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal}) => {
                         )
                     }
                 </form>
-                ):
-            (<div className="well">
-                { isAdmin ? 
-                    ('Add meals first before setting up daily menu'):
-                    ('No menu available for today')
-                }    
-                </div>)
+                ):(<div className="well" style={{'marginTop': '10px'}}>
+                    { isAdmin ? 
+                        (<h5>Add meals first before setting up daily menu </h5>) :
+                        (<h5>{message}</h5>)
+                    }    
+                </div>
+            )
             }
         </div>
     );
@@ -68,7 +88,8 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal}) => {
   
   MenuList.propTypes = {  
       menu: PropTypes.object.isRequired,
-      isAdmin: PropTypes.bool.isRequired
+      isAdmin: PropTypes.bool.isRequired,
+      allCaterers: PropTypes.array.isRequired
   };
   
   export default MenuList;  

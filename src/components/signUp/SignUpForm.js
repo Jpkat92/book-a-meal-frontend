@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import TextFormInput from '../common/forms/textFormInput'
 
 const SignUpForm = ({user, adminRole, submitted, registering, handleClick, onInputChange}) => {
-        debugger;
         return (
         <form className="formContent" onSubmit={evt => handleClick(evt, adminRole)}>
             <div className="row">

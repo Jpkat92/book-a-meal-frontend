@@ -29,7 +29,6 @@ function loadAllMeals() {
 function createMeal(meal) {
 
     return dispatch => {
-        debugger;
         mealService.createMeal(meal)
             .then(
                 meal => {
@@ -48,11 +47,9 @@ function createMeal(meal) {
 
 function updateMeal(meal) {
     return dispatch => {
-        debugger;
         mealService.updateMeal(meal.id, meal.name, meal.price)
             .then(
                 meal => {
-                    debugger;
                     dispatch(updateMealSuccess(meal));
                     dispatch(alertActions.success(`Meal id #${meal.id} successfully updated`))
                 },

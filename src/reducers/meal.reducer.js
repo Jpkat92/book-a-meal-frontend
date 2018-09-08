@@ -12,9 +12,8 @@ export function meals(state = initialState.meals, action) {
       case mealConstants.CREATE_MEAL_REQUEST:
         return state;
       case mealConstants.CREATE_MEAL_SUCCESS:
-      return [...state, Object.assign({}, action.meal)]
+        return [...state, Object.assign({}, action.meal)]
       case mealConstants.UPDATE_MEAL_SUCCESS:
-       debugger;
         return [
           ...state.filter(meal => meal.id !== action.meal.id),
           Object.assign({}, action.meal)

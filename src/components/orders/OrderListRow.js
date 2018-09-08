@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import CheckBoxInput from '../common/forms/checkBoxInput'
 
-const OrderListRow = ({order, toggleCheckBoxChange}) => {
+const OrderListRow = ({order, isAdminView, toggleCheckBoxChange}) => {
   return (
     <tr>
       <td>
@@ -15,7 +15,10 @@ const OrderListRow = ({order, toggleCheckBoxChange}) => {
       </td>
       <td>{order.meal.name}</td>
       <td>${order.meal.price}</td>
-      <td>{order.customer.firstName}</td>
+      {isAdminView ? 
+        (<td>{order.customer.firstName}</td>):
+        (<td></td>)
+      }
     </tr>
   );
 };

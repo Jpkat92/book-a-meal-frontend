@@ -101,10 +101,8 @@ class CatererDashboardPage extends Component {
         selectedMeals = selectedMeals.concat(this.state.menu.mealIds)
         if (selectedMeals.length > 0){
             const todayId = new Date().getDay();
-            this.props.updateMenu(todayId, selectedMeals);
-            console.log(selectedMeals)
+            this.props.createMenu(todayId, selectedMeals);
             history.push("/dashboard")
-            this.props.success(`${selectedMeals.length} meal(s) added to today's menu`)
         }
         else{
             this.props.error("No meals selected");
@@ -129,7 +127,6 @@ class CatererDashboardPage extends Component {
 
     render() {
         const {meals, orders, menu, user} = this.state
-        debugger;
         return (
             <div className="wrapper">
                 <div className="row">
@@ -171,7 +168,6 @@ function mapStateToProps(state) {
     const menu = getTodaysMenu(menus);
     meals = makeItemsUnchecked(meals);
     orders = makeItemsUnchecked(orders);
-    debugger;
     return {
         user,
         menus,

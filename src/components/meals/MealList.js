@@ -3,14 +3,12 @@ import PropTypes from 'prop-types'
 import MealListRow from './MealListRow'
 
 const MealList = ({meals, onAddMeal, onAddToMenu, onToggleMeal, onDeleteMeal, deletingMeal}) => {
-    debugger;
     return (
         <div id="meals" className="col-md-4">
              <div className="header">
                 <h2 style={{'margin':'5px'}}>Meals</h2>                 
             </div>
             <form>
-                <br/>
                 <div className="btn-toolbar">
                 {meals.length === 0 ?
                 ( <p></p> ):(

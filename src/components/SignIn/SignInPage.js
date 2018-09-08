@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux';
 import { userActions } from '../../actions/user.actions';
-import TextFormInput from '../common/forms/textFormInput'
+import TextFormInput from '../common/forms/textFormInput';
 
 class SignInPage extends Component {
     constructor(props, context) {
@@ -13,7 +13,6 @@ class SignInPage extends Component {
             password: '',
             submitted: false
         };
-
         this.props.dispatch(userActions.signout());
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +26,6 @@ class SignInPage extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
- 
         this.setState({ submitted: true });
         const { email, password } = this.state;
         const { dispatch } = this.props;

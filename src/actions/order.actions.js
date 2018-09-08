@@ -26,9 +26,9 @@ function loadAllOrders() {
     function loadOrdersFailure(error) { return { type: orderConstants.LOAD_ORDERS_FAILURE, error } }
 }
 
-function createOrder(mealId){
+function createOrder(mealId, catererId){
     return dispatch => {
-        orderService.createOrder(mealId)
+        orderService.createOrder(mealId, catererId)
             .then(
                 order => {
                     dispatch(createOrderSuccess(order)),

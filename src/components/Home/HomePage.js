@@ -7,27 +7,40 @@ import { orderActions } from '../../actions/order.actions';
 import { alertActions } from '../../actions/alert.actions';
 import { userActions } from '../../actions/user.actions';
 import OrderList from '../orders/OrderList';
-import { getTodaysMenu, makeItemsUnchecked, updateCheckedItems } from '../common/utils';
+import { makeItemsUnchecked, updateCheckedItems } from '../common/utils';
 
 class HomePage extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            menus: this.props.menus,
-            menu: this.props.menu,
+            menus: this.props.catererMenus,
             orders: this.props.orders,
             user: this.props.user,
             selectedMeals: [],
-            selectedOrders: []
+            selectedOrders: [],
+            selectedCaterer: {
+                id: "",
+                name: "",
+                menuDetails: {mealList:[]}
+            },
+            activeMenu: {
+                dateCreated: "",
+                mealIds: [], 
+                mealList: []
+            }
         }
         this.placeOrder = this.placeOrder.bind(this);
         this.deleteOrders = this.deleteOrders.bind(this);
         this.onOrderChecked = this.onOrderChecked.bind(this);
         this.onMealChecked = this.onMealChecked.bind(this);
+        this.handleSelectCaterer = this.handleSelectCaterer.bind(this)
     }
 
     componentWillMount() {
+        if(this.props.user.isAdmin){
+            history.push('/dashboard');
+        }
         this.props.loadMenu();
         this.props.loadAllOrders();
    }
@@ -35,23 +48,27 @@ class HomePage extends Component {
     componentWillReceiveProps(nextProps){
         if(nextProps.history.location.state !== "undefined"){
             this.setState({
-                meals: nextProps.meals,
                 orders: nextProps.orders,
-                menus: nextProps.menus,
-                menu: nextProps.menu
+                menus: nextProps.catererMenus
             })
         }
     }
 
-    onMealChecked(event, mealId){
-        let { menu, selectedMeals } = this.state;
-        let meal = this.state.menu.mealList.filter(meal => meal.id === mealId)
-        menu = {
-            ...menu,
-            mealList : [...menu.mealList.filter(meal => meal.id !== mealId),meal[0]]
-        }
+    handleSelectCaterer(event){
+        let menus = this.state.menus
+        const catererId = event.target.value;
+        const menuSelected = menus.filter(menu => menu.caterer.id === parseInt(catererId))
+        const caterer = menuSelected[0].caterer
+        const  menuDetails = menuSelected[0].menuDetails
         this.setState({
-            menu,
+            selectedCaterer: caterer,
+            activeMenu: menuDetails
+        });
+    }
+
+    onMealChecked(event, mealId){
+        let { selectedMeals } = this.state;
+        this.setState({
             selectedMeals: updateCheckedItems(event, mealId, selectedMeals)
         });
     }
@@ -65,10 +82,11 @@ class HomePage extends Component {
 
     placeOrder(event){
         event.preventDefault();
-        let { selectedMeals } = this.state;
+        let { selectedMeals, selectedCaterer } = this.state;
         for (let i = 0; i < selectedMeals.length; i++) {
-            this.props.createOrder(selectedMeals[i]);
+            this.props.createOrder(selectedMeals[i], selectedCaterer.id);
         }
+        this.setState({selectedMeals: []});
         history.push("/")
     }
 
@@ -79,13 +97,14 @@ class HomePage extends Component {
             for (let i = 0; i < selectedOrders.length; i++) {
                 this.props.deleteOrder(selectedOrders[i]);
             }
+            this.setState({selectedMeals: []});
             history.push("/")
         }
     }
  
     render() {
-        const { menu, orders, user } = this.state
-        debugger;
+        const { orders, user, selectedCaterer, activeMenu } = this.state
+        const caterers = this.state.menus
         return (
                 <div className="wrapper">
                 <div className="jumbotron">
@@ -95,8 +114,11 @@ class HomePage extends Component {
                 <div className="col-md-10">
                     <div className="mainContent">
                         <MenuList 
-                            menu={menu}
-                            meals={menu.mealList}
+                            menu={activeMenu}
+                            meals={activeMenu.mealList}
+                            onSelectCaterer={this.handleSelectCaterer}
+                            caterer={selectedCaterer}
+                            allCaterers={caterers}
                             toggleMeal={this.onMealChecked}
                             onClickButton={this.placeOrder}
                             isAdmin={user.isAdmin}/>
@@ -113,23 +135,23 @@ class HomePage extends Component {
     }
 
     function mapStateToProps(state) {
-        const { authentication } = state;
+        const { authentication, menus } = state;
         const { user } = authentication;
-        const { menus } = state
-        const { orders } = state
-        let menu = {
-            "day": {},
-            "mealIds": [],
-            "mealList": []
+        const { orders } = state;
+        
+        let menusToDisplay = menus
+        if(!user.isAdmin){
+            if (menus.length > 0 && typeof menus !== 'undefined') {
+                for (let i = 0; i < menusToDisplay.length; i++){
+                    let mealList = menusToDisplay[i].menuDetails.mealList
+                    menusToDisplay[i].menuDetails.mealList = makeItemsUnchecked(mealList);
+                }
+            }
         }
-
-        if (menus instanceof Array){
-            menu = getTodaysMenu(menus);
-        }
-        menu.mealList = makeItemsUnchecked(menu.mealList);
+        
         return {
             user,
-            menu,
+            catererMenus: menusToDisplay,
             orders
         };
     }

@@ -12,7 +12,6 @@ export function orders(state = initialState.orders, action) {
         case orderConstants.CREATE_ORDER_FAILURE:
             return state
         case orderConstants.UPDATE_ORDER_SUCCESS:
-            debugger;
             return [
                 ...state.filter(order => order.id !== action.order.id),
                 Object.assign({}, action.order)

@@ -10,7 +10,6 @@ export const menuActions = {
 
 function loadMenu(){
     return dispatch => {
-        debugger;
         menuService.getMenu()
             .then(
                 menus => {
@@ -27,14 +26,15 @@ function loadMenu(){
 
 function createMenu(day, meals){
     return dispatch => {
-        debugger;
         menuService.createMenu(day, meals)
             .then(
                 menu => {
-                    dispatch(createMenuSuccess(menu));
+                    dispatch(createMenuSuccess(menu)),
+                    dispatch(alertActions.success('Menu successfully updated'))
                 },
                 error => {
                     dispatch(createMenuFailure(error.toString()));
+                    dispatch(alertActions.failure('Menu failed to update'))
                 }
             );
     };
@@ -44,11 +44,9 @@ function createMenu(day, meals){
 
 function updateMenu(dayId, mealList){
     return dispatch => {
-        debugger;
         menuService.updateMenu(dayId, mealList)
             .then(
                 menu => {
-                    debugger;
                     dispatch(updateMenuSuccess(menu));
                     dispatch(alertActions.success(`Today's menu has been updated`))
                 },

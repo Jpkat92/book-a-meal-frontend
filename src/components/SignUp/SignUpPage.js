@@ -62,7 +62,6 @@ class SignUpPage extends Component {
     render() {
         const { isRegistering  } = this.props;
         const { user, isSubmitted } = this.state;
-        debugger;
         return (
             <div className="wrapper">
                 <div className="row">

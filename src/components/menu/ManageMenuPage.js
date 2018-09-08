@@ -28,7 +28,6 @@ export class ManageMenuPage extends React.Component {
   }
 
     componentWillReceiveProps(nextProps) {
-        debugger;
         const location = nextProps.location;
     }
 
@@ -117,7 +116,6 @@ ManageMenuPage.contextTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
-    debugger;
     const meals = ownProps.location.state.meals;
     let menu = ownProps.location.state.menu;
     let days = [

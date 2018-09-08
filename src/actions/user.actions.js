@@ -16,7 +16,6 @@ function signin(email, password) {
             .then(
                 user => { 
                     dispatch(success(user));
-                    debugger;
                     if (typeof user !== "undefined"){
                         if(user.isAdmin === true){
                             history.push('/dashboard');

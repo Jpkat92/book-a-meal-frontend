@@ -40,7 +40,7 @@ class BookAMeal extends Component {
             <Header authStatus={userStatus} profile={user}/>
             {this.state.alert.message &&
                 <div className={`alert ${this.state.alert.type} fade in`}>
-                  <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <a href="" className="close" data-dismiss="alert" aria-label="close">&times;</a>
                   {this.state.alert.message}
                 </div>
             }

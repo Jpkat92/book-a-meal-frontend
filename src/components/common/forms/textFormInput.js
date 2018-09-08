@@ -1,7 +1,7 @@
 import React from 'react'
 
 const TextFormInput = ({name, value, submitStatus, type, handleOnChange}) => {
-    const displayName = name != 'userName' ? name.toLowerCase().replace('n',' n'): name.toLowerCase();
+    const displayName = name !== 'userName' ? name.toLowerCase().replace('n',' n'): name.toLowerCase();
     const label = displayName.charAt(0).toUpperCase() + displayName.substr(1);
     const placeholder = `Enter ${displayName} here...`
     return (

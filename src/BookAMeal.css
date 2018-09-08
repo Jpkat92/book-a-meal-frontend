@@ -180,10 +180,14 @@ input[type=text]:focus, input[type=password]:focus {
 .mainContent > div > .header {
     background-color:  #003040;
     padding: 30px 40px;
+    display: inline-block;
+    width: 100%;
     color: white;
     text-align: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    min-height: 100px;
+    margin-bottom: 10px;
   }
 
   .mainContent > div > .header:after {

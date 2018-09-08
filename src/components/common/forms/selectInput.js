@@ -2,6 +2,13 @@ import React from 'react';
 import {PropTypes} from 'prop-types'
 
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
+  let sortedOptions;
+  if (isNaN(value)){
+    sortedOptions = options
+  }
+  else{
+    sortedOptions = options.filter(optionItem => optionItem.id !== value)
+  }
   return (
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
@@ -12,7 +19,7 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
           onChange={onChange}
           className="form-control">
           <option value="">{defaultOption}</option>
-          {options.map((option) => {
+          {sortedOptions.map((option) => {
             return <option key={option.id} value={option.id}>{option.name}</option>;
           })
           }
