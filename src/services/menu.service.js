@@ -30,6 +30,7 @@ function createMenu(day, meals) {
             meal_ids: meals
         })
     };
+    
     return fetch(`${URL}/menu`, requestOptions)
     .then(handleResponse)
     .catch(error => {

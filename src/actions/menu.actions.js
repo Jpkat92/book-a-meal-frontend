@@ -29,12 +29,12 @@ function createMenu(day, meals){
         menuService.createMenu(day, meals)
             .then(
                 menu => {
-                    dispatch(createMenuSuccess(menu)),
+                    dispatch(createMenuSuccess(menu));
                     dispatch(alertActions.success('Menu successfully updated'))
                 },
                 error => {
                     dispatch(createMenuFailure(error.toString()));
-                    dispatch(alertActions.failure('Menu failed to update'))
+                    dispatch(alertActions.error('Menu failed to update'))
                 }
             );
     };
@@ -51,8 +51,8 @@ function updateMenu(dayId, mealList){
                     dispatch(alertActions.success(`Today's menu has been updated`))
                 },
                 error => {
-                    dispatch(updateMenuFailure(error.toString())),
-                    dispatch(alertActions.failure(error.toString()))
+                    dispatch(updateMenuFailure(error.toString()));
+                    dispatch(alertActions.error(error.toString()))
                 }
             );
     };

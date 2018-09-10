@@ -31,12 +31,12 @@ function createOrder(mealId, catererId){
         orderService.createOrder(mealId, catererId)
             .then(
                 order => {
-                    dispatch(createOrderSuccess(order)),
-                    dispatch(alertActions.success('Order successfully created'))
+                    dispatch(createOrderSuccess(order));
+                    dispatch(alertActions.success('Order successfully created'));
                 },
                 error => {
-                    dispatch(createOrderFailure(error.toString())),
-                    dispatch(alertActions.failure(error.toString()))
+                    dispatch(createOrderFailure(error.toString()));
+                    dispatch(alertActions.error(error.toString()));
                 }
             );
     };
@@ -51,11 +51,11 @@ function deleteOrder(id){
         orderService.deleteOrder(id)
             .then(
                 message => {
-                    dispatch(deleteOrderSuccess(id)),
-                    dispatch(alertActions.success('Order successfully deleted'))
+                    dispatch(deleteOrderSuccess(id));
+                    dispatch(alertActions.success('Order successfully deleted'));
                 },
                 error => {
-                    dispatch(deleteOrderFailure(id, error.toString())),
+                    dispatch(deleteOrderFailure(id, error.toString()));
                     dispatch(alertActions.failure(error.toString()))
                 }
             );

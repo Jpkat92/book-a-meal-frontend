@@ -32,8 +32,8 @@ function createMeal(meal) {
         mealService.createMeal(meal)
             .then(
                 meal => {
-                      dispatch(createMealSuccess(meal)),
-                      dispatch(alertActions.success(`Meal successfully created`))
+                      dispatch(createMealSuccess(meal));
+                      dispatch(alertActions.success('Meal successfully created'));
                 },
                 error => {
                     dispatch(createMealFailure(error.toString()));
@@ -54,7 +54,7 @@ function updateMeal(meal) {
                     dispatch(alertActions.success(`Meal id #${meal.id} successfully updated`))
                 },
                 error => {
-                    dispatch(updateMealFailure(error.toString())),
+                    dispatch(updateMealFailure(error.toString()));
                     dispatch(alertActions.failure(error.toString()))
                 }
             );
@@ -70,17 +70,16 @@ function deleteMeal(id) {
         mealService.deleteMeal(id)
             .then(
                 message => {
-                    dispatch(deleteMealSuccess(id)),
+                    dispatch(deleteMealSuccess(id));
                     dispatch(alertActions.success('Meal successfully deleted'))
                 },
                 error => {
-                    dispatch(deleteMealFailure(id, error.toString())),
+                    dispatch(deleteMealFailure(id, error.toString()));
                     dispatch(alertActions.failure(error.toString()))
             }
         );
     };
  
-    function deleteMealRequest(id) { return { type: mealConstants.DELETE_MEAL_REQUEST, id } }
     function deleteMealSuccess(id) { return { type: mealConstants.DELETE_MEAL_SUCCESS, id } }
     function deleteMealFailure(id, error) { return { type: mealConstants.DELETE_MEAL_FAILURE, id, error } }
 }

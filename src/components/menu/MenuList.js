@@ -24,7 +24,6 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal, onSelectCate
             label = caterer.firstName+" "+caterer.lastName
         }
     }
-    debugger;
     return (
         <div id="menu-list" className="col-md-4">
             <div className="header">

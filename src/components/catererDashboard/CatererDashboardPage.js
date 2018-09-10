@@ -104,7 +104,6 @@ class CatererDashboardPage extends Component {
             if (todayId === 0){
                 todayId = 7
             }
-            debugger;
             this.props.createMenu(todayId, selectedMeals);
             history.push("/dashboard")
         }
@@ -131,7 +130,6 @@ class CatererDashboardPage extends Component {
 
     render() {
         const {meals, orders, menu, user} = this.state
-        debugger;
         return (
             <div className="wrapper">
                 <div className="row">
@@ -172,7 +170,7 @@ function mapStateToProps(state) {
     const { user } = state.authentication;
     const { menus } = state
     let { meals } = state;
-    debugger;
+    
     const menu = getTodaysMenu(menus);
     meals = makeItemsUnchecked(meals);
     orders = makeItemsUnchecked(orders);
