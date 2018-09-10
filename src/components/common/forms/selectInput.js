@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SelectInput = ({name, label, onChange, defaultOption, value, error, options}) => {
   let sortedOptions;
@@ -30,13 +31,13 @@ const SelectInput = ({name, label, onChange, defaultOption, value, error, option
 };
 
 SelectInput.propTypes = {
-  // name: PropTypes.string.isRequired,
-  // label: PropTypes.string.isRequired,
-  // onChange: PropTypes.func.isRequired,
-  // defaultOption: PropTypes.string,
-  // value: PropTypes.string,
-  // error: PropTypes.string,
-  // options: PropTypes.arrayOf(PropTypes.object)
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  defaultOption: PropTypes.string,
+  value: PropTypes.string,
+  error: PropTypes.string,
+  options: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default SelectInput;

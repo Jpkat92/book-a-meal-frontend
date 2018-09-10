@@ -1,8 +1,7 @@
 import { mealService } from '../../src/services/meal.service'
+import { URL } from '../../src/helpers/auth_header'
 
-const URL = 'https://bookamealapi.herokuapp.com/api/v1'
-
-describe('testing meals API', () => {
+describe('testing meals API endpoint', () => {
     beforeEach(() => {
       fetch.resetMocks()
     })

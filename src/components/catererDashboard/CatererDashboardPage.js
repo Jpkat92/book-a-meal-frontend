@@ -146,6 +146,7 @@ class CatererDashboardPage extends Component {
                                   onClickButton={this.redirectToManageMenuPage}
                                   isAdmin={user.isAdmin}/> 
                             <OrderList orders={orders}
+                                isAdmin={user.isAdmin}
                                 changingOrder={this.state.deletingOrder}
                                 onToggleOrder={this.onOrderChecked}
                                 onClickButton={this.deleteOrders}/>

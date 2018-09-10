@@ -1,8 +1,7 @@
 import { orderService } from '../../src/services/order.service'
+import { URL } from '../../src/helpers/auth_header'
 
-const URL = 'https://bookamealapi.herokuapp.com/api/v1'
-
-describe('testing orders API', () => {
+describe('testing orders API endpoint', () => {
     beforeEach(() => {
       fetch.resetMocks()
     })
