@@ -16,9 +16,6 @@ function getAllMeals() {
  
     return fetch(`${URL}/meals`, requestOptions)
         .then(handleResponse)
-        // .then(response => {
-        //     return response.json();
-        // })
         .catch(error => {
             console.log(error);
             throw(error);

@@ -16,15 +16,6 @@ function signin(email, password) {
                 }
         };
     return axios.post(`${URL}/auth/login/`, data, requestConfig)
-        .then(response => {
-            if (response.data.token) { 
-                localStorage.setItem('user', JSON.stringify(response.data));
-            }
-            return response.data;
-        })
-        .catch(function (error) {
-            console.log(error);
-          });
 }
 
 function register(user) {

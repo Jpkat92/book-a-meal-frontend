@@ -15,8 +15,9 @@ function signin(email, password) {
         userService.signin(email, password)
             .then(
                 user => { 
-                    dispatch(success(user));
+                    dispatch(success(user.data));
                     if (typeof user !== "undefined"){
+                        localStorage.setItem('user', JSON.stringify(user.data));
                         if(user.isAdmin === true){
                             history.push('/dashboard');
                         }
