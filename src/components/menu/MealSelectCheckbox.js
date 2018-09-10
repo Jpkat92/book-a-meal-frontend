@@ -20,9 +20,9 @@ const MealSelectCheckbox = ({meal, onMealChecked, error}) => {
 };
 
 MealSelectCheckbox.propTypes = {
-  // meal: PropTypes.object.isRequired,
-  // onMealChecked: PropTypes.func.isRequired,
-  // error: PropTypes.string
+  meal: PropTypes.object.isRequired,
+  onMealChecked: PropTypes.func.isRequired,
+  error: PropTypes.string
 };
 
 export default MealSelectCheckbox;

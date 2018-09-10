@@ -1,10 +1,11 @@
 export function getTodaysMenu(menus){
     const today = new Date();
-    const dayId = today.getDay()
+    let dayId = today.getDay()
+    if(dayId === 0) {dayId = 7}
     let todayMenu = {};
     if(typeof menus !== "undefined" && menus.length !== 0 && Array.isArray(menus)){
         todayMenu = menus.filter(menu => menu.day.id === dayId)
-        if (typeof todayMenu[0] == "undefined"){
+        if (typeof todayMenu[0] === "undefined"){
             todayMenu = { dateCreated: "", day: {id: dayId}, mealIds: [], mealList: []}
         }
         else {

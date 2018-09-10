@@ -27,10 +27,6 @@ export class ManageMenuPage extends React.Component {
     this.onDaySelected = this.onDaySelected.bind(this);
   }
 
-    componentWillReceiveProps(nextProps) {
-        const location = nextProps.location;
-    }
-
     updateMenuState(event) {
         const field = event.target.name;
         let menu = Object.assign({}, this.state.menu);
@@ -43,7 +39,7 @@ export class ManageMenuPage extends React.Component {
 
         const selectedMeals = this.state.selectedMeals;
         this.setState({creating: true});
-        let day = parseInt(this.state.selectedDay);
+        let day = parseInt(this.state.selectedDay,10);
         this.props.createMenu(day, selectedMeals);
         this.setState({selectedMeals: [], selectedDay: null})
 
@@ -108,7 +104,8 @@ export class ManageMenuPage extends React.Component {
 
 ManageMenuPage.propTypes = {
   menu: PropTypes.object.isRequired,
-  actions: PropTypes.object.isRequired
+  days: PropTypes.array.isRequired,
+  meals: PropTypes.array.isRequired
 };
 
 ManageMenuPage.contextTypes = {
@@ -116,6 +113,7 @@ ManageMenuPage.contextTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+    debugger;
     const meals = ownProps.location.state.meals;
     let menu = ownProps.location.state.menu;
     let days = [

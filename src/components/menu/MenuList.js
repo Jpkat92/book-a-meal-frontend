@@ -24,6 +24,7 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal, onSelectCate
             label = caterer.firstName+" "+caterer.lastName
         }
     }
+    debugger;
     return (
         <div id="menu-list" className="col-md-4">
             <div className="header">
@@ -89,6 +90,10 @@ const MenuList = ({menu, meals, isAdmin, onClickButton, toggleMeal, onSelectCate
   MenuList.propTypes = {  
       menu: PropTypes.object.isRequired,
       isAdmin: PropTypes.bool.isRequired,
+      onClickButton: PropTypes.func.isRequired,
+      toggleMeal: PropTypes.func.isRequired,
+      onSelectCaterer: PropTypes.func.isRequired,
+      caterer: PropTypes.object.isRequired,
       allCaterers: PropTypes.array.isRequired
   };
   

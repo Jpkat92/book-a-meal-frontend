@@ -24,7 +24,9 @@ const OrderListRow = ({order, isAdminView, toggleCheckBoxChange}) => {
 };
 
 OrderListRow.propTypes = {
-  order: PropTypes.object.isRequired
+  order: PropTypes.object.isRequired,
+  isAdminView: PropTypes.bool.isRequired,
+  toggleCheckBoxChange: PropTypes.func.isRequired
 };
 
 export default OrderListRow;

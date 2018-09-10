@@ -100,7 +100,11 @@ class CatererDashboardPage extends Component {
         let { selectedMeals } = this.state;
         selectedMeals = selectedMeals.concat(this.state.menu.mealIds)
         if (selectedMeals.length > 0){
-            const todayId = new Date().getDay();
+            let todayId = new Date().getDay();
+            if (todayId === 0){
+                todayId = 7
+            }
+            debugger;
             this.props.createMenu(todayId, selectedMeals);
             history.push("/dashboard")
         }
@@ -127,6 +131,7 @@ class CatererDashboardPage extends Component {
 
     render() {
         const {meals, orders, menu, user} = this.state
+        debugger;
         return (
             <div className="wrapper">
                 <div className="row">
@@ -157,7 +162,9 @@ class CatererDashboardPage extends Component {
 CatererDashboardPage.propTypes = {
     menus: PropTypes.array.isRequired,
     meals: PropTypes.array.isRequired,
-    orders: PropTypes.array.isRequired
+    orders: PropTypes.array.isRequired,
+    menu: PropTypes.object.isRequired,
+    user: PropTypes.object
 };
 
 function mapStateToProps(state) {
@@ -165,6 +172,7 @@ function mapStateToProps(state) {
     const { user } = state.authentication;
     const { menus } = state
     let { meals } = state;
+    debugger;
     const menu = getTodaysMenu(menus);
     meals = makeItemsUnchecked(meals);
     orders = makeItemsUnchecked(orders);

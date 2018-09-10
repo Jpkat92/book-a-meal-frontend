@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextInput from '../common/forms/textInput';
 import NumberInput from '../common/forms/numberInput';
 
@@ -31,11 +32,11 @@ const MealForm = ({meal, onSave, onChange, saving, errors}) => {
 };
 
 MealForm.propTypes = {
-//   meal: React.PropTypes.object.isRequired,
-//   onSave: React.PropTypes.func.isRequired,
-//   onChange: React.PropTypes.func.isRequired,
-//   saving: React.PropTypes.bool,
-//   errors: React.PropTypes.object
+  meal: PropTypes.object.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  saving: PropTypes.bool,
+  errors: PropTypes.object
 };
 
 export default MealForm;

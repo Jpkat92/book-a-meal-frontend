@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs , Tab } from 'react-bootstrap';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import { alertActions } from '../../actions/alert.actions';
 import { userActions } from '../../actions/user.actions';
 import SignUpForm from './SignUpForm'
@@ -25,7 +26,7 @@ class SignUpPage extends Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-      }
+    }
     
     handleSelect(key) {
         this.setState({ key });
@@ -87,6 +88,10 @@ class SignUpPage extends Component {
     }
   }
   
+  SignUpPage.propTypes = {
+      isRegistering: PropTypes.bool.isRequired
+  }
+
   function mapStateToProps(state) {
     const { registering } = state.registration;
     return {

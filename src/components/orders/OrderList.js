@@ -43,7 +43,8 @@ const OrderList = ({isAdmin, orders, onToggleOrder, onClickButton, changingOrder
     orders: PropTypes.array.isRequired,
     isAdmin: PropTypes.bool.isRequired,
     onToggleOrder: PropTypes.func.isRequired,
-    onClickButton: PropTypes.func.isRequired
+    onClickButton: PropTypes.func.isRequired,
+    changingOrder: PropTypes.bool.isRequired
   };
   
   export default OrderList;  

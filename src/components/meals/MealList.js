@@ -61,7 +61,12 @@ const MealList = ({meals, onAddMeal, onAddToMenu, onToggleMeal, onDeleteMeal, de
   };
   
   MealList.propTypes = {  
-    meals: PropTypes.array.isRequired
+    meals: PropTypes.array.isRequired,
+    onAddMeal: PropTypes.func.isRequired,
+    onAddToMenu: PropTypes.func.isRequired,
+    onToggleMeal: PropTypes.func.isRequired,
+    onDeleteMeal: PropTypes.func.isRequired,
+    deletingMeal: PropTypes.bool
   };
   
   export default MealList;  

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 import TextFormInput from '../common/forms/textFormInput'
 
 const SignUpForm = ({user, adminRole, submitted, registering, handleClick, onInputChange}) => {
@@ -39,5 +40,14 @@ const SignUpForm = ({user, adminRole, submitted, registering, handleClick, onInp
         </form>
         );
     };
+
+    SignUpForm.propTypes = {
+        user: PropTypes.object.isRequired,
+        adminRole: PropTypes.bool.isRequired,
+        submitted: PropTypes.bool.isRequired,
+        registering: PropTypes.bool.isRequired,
+        handleClick: PropTypes.func.isRequired,
+        onInputChange: PropTypes.func.isRequired
+    }
 
 export default SignUpForm;

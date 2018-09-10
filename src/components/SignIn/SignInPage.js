@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import { userActions } from '../../actions/user.actions';
 import TextFormInput from '../common/forms/textFormInput';
 
@@ -74,6 +75,11 @@ class SignInPage extends Component {
         );
     }
   }
+
+  SignInPage.propTypes = {
+      signingIn: PropTypes.bool.isRequired
+  }
+
   function mapStateToProps(state) {
     const { signingIn } = state.authentication;
     return {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { history } from '../../helpers/history';
 import MenuList from '../menu/MenuList'
 import { menuActions } from '../../actions/menu.actions';
@@ -57,7 +58,7 @@ class HomePage extends Component {
     handleSelectCaterer(event){
         let menus = this.state.menus
         const catererId = event.target.value;
-        const menuSelected = menus.filter(menu => menu.caterer.id === parseInt(catererId))
+        const menuSelected = menus.filter(menu => menu.caterer.id === parseInt(catererId, 10))
         const caterer = menuSelected[0].caterer
         const  menuDetails = menuSelected[0].menuDetails
         this.setState({
@@ -133,6 +134,12 @@ class HomePage extends Component {
             );
         }
     }
+
+    HomePage.proptypes = {
+        catererMenus: PropTypes.array.isRequired,
+        orders: PropTypes.array.isRequired,
+        user: PropTypes.object.isRequired
+    };
 
     function mapStateToProps(state) {
         const { authentication, menus } = state;

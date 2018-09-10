@@ -18,8 +18,8 @@ const MealCheckboxList = ({meals, onMealToggle}) => {
   };
   
     MealCheckboxList.propTypes = {  
-    //   meal: PropTypes.object.isRequired,
-    //   onMealChecked: PropTypes.func.isRequired
+      meal: PropTypes.object.isRequired,
+      onMealToggle: PropTypes.func.isRequired
   };
   
   export default MealCheckboxList;  

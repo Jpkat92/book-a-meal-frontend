@@ -22,7 +22,9 @@ const MenuListRow = ({meal, canCheckMeal, toggleCheckBoxChange}) => {
 };
 
 MenuListRow.propTypes = {
-  meal: PropTypes.object.isRequired
+  meal: PropTypes.object.isRequired,
+  canCheckMeal: PropTypes.bool.isRequired,
+  toggleCheckBoxChange: PropTypes.func.isRequired
 };
 
 export default MenuListRow;

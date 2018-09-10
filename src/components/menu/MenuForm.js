@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import SelectInput from '../common/forms/selectInput';
 import MealCheckboxList from './MealCheckboxList';
 
@@ -65,11 +66,15 @@ const MenuForm = ({menu, meals, allDays, onCreateMenu, onMealToggle, selectedDay
 };
 
 MenuForm.propTypes = {
-//   Menu: React.PropTypes.object.isRequired,
-//   onSave: React.PropTypes.func.isRequired,
-//   onChange: React.PropTypes.func.isRequired,
-//   saving: React.PropTypes.bool,
-//   errors: React.PropTypes.object
+  menu: PropTypes.object.isRequired,
+  meals: PropTypes.array.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onCreateMenu: PropTypes.func.isRequired,
+  onMealToggle: PropTypes.func.isRequired,
+  selectedDay: PropTypes.object.isRequired,
+  onSelectDay: PropTypes.func.isRequired,
+  creating: PropTypes.bool,
+  errors: PropTypes.object
 };
 
 export default MenuForm;
