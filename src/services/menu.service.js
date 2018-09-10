@@ -14,11 +14,7 @@ function getMenu() {
     };
  
     return fetch(`${URL}/menu`, requestOptions)
-    .then(handleResponse)
-    .catch(error => {
-            console.log(error);
-            throw(error);
-        });
+        .then(handleResponse)
     };
 
 function createMenu(day, meals) {
@@ -32,10 +28,8 @@ function createMenu(day, meals) {
     };
     
     return fetch(`${URL}/menu`, requestOptions)
-    .then(handleResponse)
-    .catch(error => {
-            throw(error);
-        });
+        .then(handleResponse)
+    
     };
 
 
@@ -48,9 +42,6 @@ function updateMenu(day, meals) {
             meal_ids: meals
         })
     };
-    return fetch(`${URL}/menu/${day}`, requestOptions).then(response => {
-        return response.json();
-    }).catch(error => {
-            throw(error);
-        });
+    return fetch(`${URL}/menu/${day}`, requestOptions)
+        .then(handleResponse)
     };

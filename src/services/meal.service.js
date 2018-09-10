@@ -16,10 +16,6 @@ function getAllMeals() {
  
     return fetch(`${URL}/meals`, requestOptions)
         .then(handleResponse)
-        .catch(error => {
-            console.log(error);
-            throw(error);
-        });
     };
 
 function createMeal(meal) {
@@ -31,13 +27,7 @@ function createMeal(meal) {
  
     return fetch(`${URL}/meals`, requestConfig)
     .then(handleResponse)
-    // .then(response => {
-    //     return response.json();
-    // })
-    .catch(error => {
-            throw(error);
-        });
-    };
+};
 
 function updateMeal(id, name, price) {
     const requestConfig = {
@@ -45,11 +35,7 @@ function updateMeal(id, name, price) {
         headers: authHeader(),
         body: JSON.stringify({name,price})
     };
-    return fetch(`${URL}/meals/${id}`, requestConfig).then(response => {
-        return response.json();
-    }).catch(error => {
-            console.log(error);
-        });
+    return fetch(`${URL}/meals/${id}`, requestConfig).then(handleResponse)
     };
 
 function deleteMeal(id) {
@@ -58,9 +44,5 @@ function deleteMeal(id) {
         headers: authHeader()
     };
     
-    return fetch(`${URL}/meals/${id}`, requestConfig).then(response => {
-        return response.json();
-    }).catch(error => {
-            throw(error);
-        });
+    return fetch(`${URL}/meals/${id}`, requestConfig).then(handleResponse)
     };

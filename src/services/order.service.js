@@ -15,9 +15,6 @@ function getAllOrders() {
     };
     return fetch(`${URL}/orders`, requestOptions)
         .then(handleResponse)
-        .catch(error => {
-            throw(error);
-        });
     };
 
 function createOrder(mealId, catererId) {
@@ -31,9 +28,6 @@ function createOrder(mealId, catererId) {
     };
     return fetch(`${URL}/orders/`, requestOptions)
         .then(handleResponse)
-        .catch(error => {
-            throw(error);
-        });
     };
 
 function updateOrder(id, order) {
@@ -42,11 +36,8 @@ function updateOrder(id, order) {
         headers: authHeader()
     };
  
-    return fetch(`${URL}/orders/${id}`, requestOptions).then(response => {
-        return response.json();
-    }).catch(error => {
-            throw(error);
-        });
+    return fetch(`${URL}/orders/${id}`, requestOptions)
+        .then(handleResponse)
     };
 
 function deleteOrder(id) {
@@ -54,9 +45,6 @@ function deleteOrder(id) {
         method: 'DELETE',
         headers: authHeader()
     };
-    return fetch(`${URL}/orders/${id}`, requestOptions).then(response => {
-        return response.json();
-    }).catch(error => {
-            throw(error);
-        });
+    return fetch(`${URL}/orders/${id}`, requestOptions)
+        .then(handleResponse)
     };
