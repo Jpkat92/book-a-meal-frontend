@@ -5,19 +5,19 @@ import {
   Switch
 } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { history } from './helpers/history';
-import { alertActions } from './actions/alert.actions';
-import { userActions } from './actions/user.actions';
-import { SecureRoute } from './components/SecureRoute';
-import Header from './components/common/header';
-import { HomePage } from './components/home/HomePage';
-import { SignUpPage } from './components/signUp/SignUpPage';
-import { SignInPage } from './components/signIn/SignInPage';
-import CatererDashboardPage from './components/catererDashboard/CatererDashboardPage';
-import ManageMealPage from './components/meals/ManageMealPage'
-import ManageMenuPage from './components/menu/ManageMenuPage'
-import './css/bootstrap.min.css';
-import './BookAMeal.css';
+import { history } from '../helpers/history';
+import { alertActions } from '../actions/alert.actions';
+import { userActions } from '../actions/user.actions';
+import { SecureRoute } from './SecureRoute';
+import Header from './common/header';
+import { HomePage } from './home/HomePage';
+import { SignUpPage } from './signUp/SignUpPage';
+import { SignInPage } from './signIn/SignInPage';
+import CatererDashboardPage from './catererDashboard/CatererDashboardPage';
+import ManageMealPage from './meals/ManageMealPage'
+import ManageMenuPage from './menu/ManageMenuPage'
+import '../css/bootstrap.min.css';
+import '../BookAMeal.css';
 
 class BookAMeal extends Component {
   constructor(props) {

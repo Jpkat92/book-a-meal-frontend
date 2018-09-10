@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './helpers/store'
 import './index.css';
-import { BookAMeal } from './BookAMeal';
+import { BookAMeal } from './components/BookAMeal';
 
 const store = configureStore();
 
