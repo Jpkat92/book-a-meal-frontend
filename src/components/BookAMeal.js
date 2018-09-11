@@ -32,16 +32,23 @@ class BookAMeal extends Component {
       });
   }
 
+  componentWillReceiveProps(nextProps){
+    this.setState({
+        alert: nextProps.alert
+    })
+}
+
   render() {
-    const { userStatus, user } = this.props;
+    debugger;
+    const { userStatus, user, alert } = this.props;
     return (
       <Router history={history}>
         <div className="container-fluid">
             <Header authStatus={userStatus} profile={user}/>
             {this.state.alert.message &&
-                <div className={`alert ${this.state.alert.type} fade in`}>
+                <div className={`alert ${alert.type} fade in`}>
                   <a href="" className="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  {this.state.alert.message}
+                  {alert.message}
                 </div>
             }
             <Switch>
@@ -68,6 +75,7 @@ function mapStateToProps(state) {
   }else if (user && !user.isAdmin) {
     userStatus = 2
   }
+  debugger;
   return {
       alert,
       user,

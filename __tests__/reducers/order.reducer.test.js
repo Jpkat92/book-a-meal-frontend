@@ -1,6 +1,13 @@
 import { orders } from '../../src/reducers/order.reducer';
 import { orderConstants } from '../../src/constants/order.constants';
 
+const orderAction = (actionType, actionId) => {
+    if (typeof actionId !== 'undefined'){
+      return {type: actionType, id: actionId}
+    }
+    return {type: actionType}
+  }
+
 const initial_state = [
     {
         "date_submitted": "2018-09-04T20:26:06.093561+00:00",
@@ -32,32 +39,43 @@ const initial_state = [
     }
 ]
 
+const order = {
+        "date_submitted": "2018-09-04T20:27:46.620932+00:00",
+        "id": 7,
+        "meal": {
+            "id": 7,
+            "name": "Chicken Tikka",
+            "price": 15
+        },
+        "user": {
+            "firstName": "Paul",
+            "id": 2,
+            "lastName": "Kayongo"
+        }
+}
 
 describe('initial_state', () => {
     test('is correct', () => {
-      const orderAction = { type: 'fake_orderAction' };
+      const action = orderAction('fake_orderAction');
       const initialState = [];
   
-      expect(orders(undefined, orderAction)).toEqual(initialState);
+      expect(orders(undefined, action)).toEqual(initialState);
     });
   });
 
 describe('Loading orders request', () => {
     test('it returns loading order status', () => {
-        const orderAction = {
-            type: orderConstants.LOAD_ORDERS_REQUEST
-        };
+        const action = orderAction(orderConstants.LOAD_ORDERS_REQUEST) 
         const expectedState =  [];
     
-        expect(orders(undefined, orderAction)).toEqual(expectedState);
+        expect(orders(undefined, action)).toEqual(expectedState);
       });
 });
 
 describe('Load orders successful', () => {
     test('it returns orders', () => {
-        const orderAction = {
-            type: orderConstants.LOAD_ORDERS_SUCCESS,
-            orders: [
+        let action = orderAction(orderConstants.LOAD_ORDERS_SUCCESS)
+        action.orders = [
                 {
                     "date_submitted": "2018-09-04T20:26:06.093561+00:00",
                     "id": 5,
@@ -73,132 +91,94 @@ describe('Load orders successful', () => {
                     }
                 }
             ] 
-        };
-        const expectedState =  orderAction.orders;
+        
+        const expectedState =  action.orders;
     
-        expect(orders(undefined, orderAction)).toEqual(expectedState);
+        expect(orders(undefined, action)).toEqual(expectedState);
       });
 });
 
 describe('Load orders failure', () => {
     test('fails to return orders', () => {
-        const orderAction = { 
-            type: orderConstants.LOAD_ORDERS_FAILURE, 
-            error : "Failed to fetch orders"
-        };
+        let action = orderAction(orderConstants.LOAD_ORDERS_FAILURE) 
+        action.error = "Failed to fetch orders"
         const expectedState = [];
     
-        expect(orders(undefined, orderAction)).toEqual(expectedState);
+        expect(orders(undefined, action)).toEqual(expectedState);
       });
 });
 
 describe('Create a order', () => {
     test('it returns orders with new order', () => {
-        const orderAction = {
-            type: orderConstants.CREATE_ORDER_SUCCESS,
-            order: 
-            {
-                "date_submitted": "2018-09-04T20:27:46.620932+00:00",
-                "id": 7,
-                "meal": {
-                    "id": 7,
-                    "name": "Chicken Tikka",
-                    "price": 15
-                },
-                "user": {
-                    "firstName": "Paul",
-                    "id": 2,
-                    "lastName": "Kayongo"
-                }
-            }
-        };
+        let action = orderAction(orderConstants.CREATE_ORDER_SUCCESS)
+        action.order = order
         const expectedState =  [
                     ...initial_state,
-                    Object.assign({}, orderAction.order)
+                    Object.assign({}, action.order)
                 ];
     
-        expect(orders(initial_state, orderAction)).toEqual(expectedState);
+        expect(orders(initial_state, action)).toEqual(expectedState);
       });
 });
 
 describe('Create order failure', () => {
     test('fails to create a order', () => {
-        const orderAction = { 
-            type: orderConstants.CREATE_ORDER_FAILURE, 
-            error : "Failed to create order"
-        };
+        let action = orderAction(orderConstants.CREATE_ORDER_FAILURE)
+        action.error = "Failed to create order"
+        
         const expectedState = [];
     
-        expect(orders(undefined, orderAction)).toEqual(expectedState);
+        expect(orders(undefined, action)).toEqual(expectedState);
       });
 });
 
 describe('Update order success', () => {
     test('it returns orders with an updated order', () => {
         
-        const orderAction = {
-            type: orderConstants.UPDATE_ORDER_SUCCESS,
-            order: 
-            {
-                "date_submitted": "2018-09-04T20:27:46.620932+00:00",
-                "id": 7,
-                "meal": {
-                    "id": 8,
-                    "name": "Biryani Rice",
-                    "price": 10
-                },
-                "user": {
-                    "firstName": "Paul",
-                    "id": 2,
-                    "lastName": "Kayongo"
-                }
-            }
-        };
+        let action = orderAction(orderConstants.UPDATE_ORDER_SUCCESS)
+            action.order = order
+        
         const expectedState =  [
                     ...initial_state.filter(
-                        order => order.id !== orderAction.order.id),
-                    Object.assign({}, orderAction.order)
+                        order => order.id !== action.order.id),
+                    Object.assign({}, action.order)
                 ];
     
-        expect(orders(initial_state, orderAction)).toEqual(expectedState);
+        expect(orders(initial_state, action)).toEqual(expectedState);
       });
 });
 
 describe('Update order failure', () => {
     test('it fails to update a order', () => {
-        const orderAction = {
-            type: orderConstants.UPDATE_ORDER_FAILURE,
-            error : "Failed to update a order"
-        };
+        let action = orderAction(orderConstants.UPDATE_ORDER_FAILURE)
+            action.error = "Failed to update a order"
+        
         const expectedState =  initial_state;
     
-        expect(orders(initial_state, orderAction)).toEqual(expectedState);
+        expect(orders(initial_state, action)).toEqual(expectedState);
       });
 });
 
 describe('Delete order success', () => {
     test('it returns orders without deleted order', () => {
-        const orderAction = {
-            type: orderConstants.DELETE_ORDER_SUCCESS,
-            id: 5
-        };
+        const action = orderAction(orderConstants.DELETE_ORDER_SUCCESS,5)
+          
         const expectedState =  [
                     ...initial_state.filter(
-                        order => order.id !== orderAction.id)
+                        order => order.id !== action.id)
                 ];
     
-        expect(orders(initial_state, orderAction)).toEqual(expectedState);
+        expect(orders(initial_state, action)).toEqual(expectedState);
       });
 });
 
 describe('Delete order failure', () => {
     test('it fails to delete a order', () => {
-        const orderAction = {
-            type: orderConstants.DELETE_order_FAILURE,
-            error : "Failed to delete a order"
-        };
+        let action = orderAction(orderConstants.DELETE_order_FAILURE)
+            action.error = "Failed to delete a order"
+
         const expectedState =  initial_state;
     
-        expect(orders(initial_state, orderAction)).toEqual(expectedState);
+        expect(orders(initial_state, action)).toEqual(expectedState);
       });
 });

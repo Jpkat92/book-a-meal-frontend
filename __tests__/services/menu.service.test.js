@@ -206,42 +206,11 @@ describe('testing menu API endpoint', () => {
 
     it('it creates a menu', () => {
         const payload = {
-                  "day": 5,
+                  "day": 1,
                   "meal_ids": [1,2,4]
               }
               
-        const response =  {
-            "dateCreated": "Mon, 10 Sep 2018 08:59:08 GMT",
-            "day": {
-                "id": 2,
-                "name": "Tuesday"
-            },
-            "mealIds": [
-                1,
-                2,
-                4
-            ],
-            "mealList": [
-                {
-                    "caterer_id": 3,
-                    "id": 1,
-                    "name": "Chicken Tandoori",
-                    "price": 18.5
-                },
-                {
-                    "caterer_id": 3,
-                    "id": 2,
-                    "name": "Fish Tikka",
-                    "price": 11
-                },
-                {
-                    "caterer_id": 3,
-                    "id": 4,
-                    "name": "Biryani Rice",
-                    "price": 19
-                }
-            ]
-        }
+        const response =  menuData[0]
         fetch.mockResponseOnce(JSON.stringify({data: response}))
      
         //assert on the response
@@ -256,36 +225,11 @@ describe('testing menu API endpoint', () => {
 
       it('it updates a menu', () => {
         const payload = {
-                  "meal_ids": [7,4]
+                  "meal_ids": [9,2,3,4,1]
               }
-        const dayId = 2
+        const dayId = 6
               
-        const response =  {
-            "Message": "Menu updated",
-            "dateCreated": "Mon, 10 Sep 2018 09:05:19 GMT",
-            "day": {
-                "id": 2,
-                "name": "Tuesday"
-            },
-            "mealIds": [
-                4,
-                7
-            ],
-            "mealList": [
-                {
-                    "caterer_id": 3,
-                    "id": 4,
-                    "name": "Biryani Rice",
-                    "price": 19
-                },
-                {
-                    "caterer_id": 4,
-                    "id": 7,
-                    "name": "Potatoes & Meat",
-                    "price": 12
-                }
-            ]
-        }
+        const response =  menuData[3] 
         fetch.mockResponseOnce(JSON.stringify({data: response}))
      
         //assert on the response
