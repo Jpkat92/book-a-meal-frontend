@@ -49,12 +49,6 @@ export class ManageMenuPage extends React.Component {
         this.setState({creating: false});
         history.push("/dashboard")
     }
-    
-    redirect(message) {
-        this.setState({creating: false});
-        this.props.success(message);
-        this.context.router.history.push('/dashboard');
-    }
 
     onDaySelected = (event) => {
         let { selectedDay } = this.state;
@@ -68,10 +62,10 @@ export class ManageMenuPage extends React.Component {
             case true:
                 selectedMeals.push(mealId);
                 break;
-        case false:
+            case false:
                 selectedMeals.pop(mealId);
                 break;
-        default:
+            default:
                 break;
         }
         this.setState({selectedMeals});
@@ -92,17 +86,11 @@ export class ManageMenuPage extends React.Component {
                             <div className="row">
                                 <div className="col-md-8 col-md-offset-1">
                                 <MenuForm
-                                    meals={this.state.meals}
-                                    onChange={this.updateOrderState}
-                                    onCreateMenu={this.createMenu}
-                                    onMealToggle={this.onMealChecked}
-                                    onSelectDay={this.onDaySelected}
-                                    onCancel={this.cancelManageMenu}
-                                    selectedDay={this.state.selectedDay}
-                                    allDays={days}
-                                    menu={this.state.menu}
-                                    errors={this.state.errors}
-                                    creating={this.state.creating}
+                                    meals={this.state.meals} onChange={this.updateOrderState}
+                                    onCreateMenu={this.createMenu} onMealToggle={this.onMealChecked}
+                                    onSelectDay={this.onDaySelected} onCancel={this.cancelManageMenu}
+                                    selectedDay={this.state.selectedDay} allDays={days} menu={this.state.menu}
+                                    errors={this.state.errors} creating={this.state.creating}
                                 />
                             </div>
                             </div>
@@ -134,37 +122,7 @@ function mapStateToProps(state, ownProps) {
     const { menus } = state
     const meals = ownProps.location.state.meals;
     let menu = ownProps.location.state.menu;
-    let days = [
-        {
-            id: 1,
-            name: "Monday"
-        },
-        {
-            id: 2,
-            name: "Tuesday"
-        },
-        {
-            id: 3,
-            name: "Wednesday"
-        },
-        {
-            id: 4,
-            name: "Thursday"
-        },
-        {
-            id: 5,
-            name: "Friday"
-        },
-        {
-            id: 6,
-            name: "Saturday"
-        },
-        {
-            id: 7,
-            name: "Sunday"
-        },
-    ]
-    days = daysFormattedForDropdown(days);
+    const days = daysFormattedForDropdown();
     return {
         menus,
         menu,

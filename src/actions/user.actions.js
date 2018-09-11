@@ -18,12 +18,7 @@ function signin(email, password) {
                     dispatch(success(user.data));
                     if (typeof user !== "undefined"){
                         localStorage.setItem('user', JSON.stringify(user.data));
-                        if(user.isAdmin === true){
-                            history.push('/dashboard');
-                        }
-                        else{
-                            history.push('/');
-                        }
+                        user.isAdmin ? history.push('/dashboard') : history.push('/')
                     }
                     dispatch(alertActions.success('You have successfully signed in'));
                 },

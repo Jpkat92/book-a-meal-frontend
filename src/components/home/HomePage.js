@@ -115,17 +115,12 @@ class HomePage extends Component {
                 <div className="col-md-10">
                     <div className="mainContent">
                         <MenuList 
-                            menu={activeMenu}
-                            meals={activeMenu.mealList}
-                            onSelectCaterer={this.handleSelectCaterer}
-                            caterer={selectedCaterer}
-                            allCaterers={caterers}
-                            toggleMeal={this.onMealChecked}
-                            onClickButton={this.placeOrder}
-                            isAdmin={user.isAdmin}/>
+                            menu={activeMenu} meals={activeMenu.mealList}
+                            onSelectCaterer={this.handleSelectCaterer} caterer={selectedCaterer}
+                            allCaterers={caterers} toggleMeal={this.onMealChecked}
+                            onClickButton={this.placeOrder} isAdmin={user.isAdmin}/>
                         <OrderList 
-                            orders={orders}
-                            changingOrder={false}
+                            orders={orders} changingOrder={false}
                             onToggleOrder={this.onOrderChecked}
                             onClickButton={this.deleteOrders}/> 
                 </div>
@@ -142,9 +137,8 @@ class HomePage extends Component {
     };
 
     function mapStateToProps(state) {
-        const { authentication, menus } = state;
+        const { authentication, menus, orders } = state;
         const { user } = authentication;
-        const { orders } = state;
         
         let menusToDisplay = menus
         if(!user.isAdmin){
@@ -157,9 +151,7 @@ class HomePage extends Component {
         }
         
         return {
-            user,
-            catererMenus: menusToDisplay,
-            orders
+            user, catererMenus: menusToDisplay, orders
         };
     }
 

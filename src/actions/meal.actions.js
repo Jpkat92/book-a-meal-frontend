@@ -36,7 +36,7 @@ function createMeal(meal) {
                       dispatch(alertActions.success('Meal successfully created'));
                 },
                 error => {
-                    dispatch(createMealFailure(error.toString()));
+                    dispatch(createMealFailure(error));
                 }
             );
     };
@@ -54,8 +54,8 @@ function updateMeal(meal) {
                     dispatch(alertActions.success(`Meal id #${meal.id} successfully updated`))
                 },
                 error => {
-                    dispatch(updateMealFailure(error.toString()));
-                    dispatch(alertActions.failure(error.toString()))
+                    dispatch(updateMealFailure(error));
+                    dispatch(alertActions.failure(error))
                 }
             );
     };

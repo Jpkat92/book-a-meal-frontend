@@ -135,18 +135,15 @@ class CatererDashboardPage extends Component {
                 <div className="row">
                     <div className="col-md-offset-1 col-md-10 col-xs-12">
                         <div className="mainContent">
-                            <MealList meals={meals}
-                                onAddMeal={this.redirectToAddMealPage}
+                            <MealList meals={meals} onAddMeal={this.redirectToAddMealPage}
                                 onAddToMenu={this.addMealsToMenu}
                                 deletingMeal={this.state.deletingMeal}
                                 onToggleMeal={this.onMealChecked}
                                 onDeleteMeal={this.deleteMeals}/>
-                            <MenuList menu={menu} 
-                                  meals={meals}
+                            <MenuList menu={menu} meals={meals}
                                   onClickButton={this.redirectToManageMenuPage}
                                   isAdmin={user.isAdmin}/> 
-                            <OrderList orders={orders}
-                                isAdmin={user.isAdmin}
+                            <OrderList orders={orders} isAdmin={user.isAdmin}
                                 changingOrder={this.state.deletingOrder}
                                 onToggleOrder={this.onOrderChecked}
                                 onClickButton={this.deleteOrders}/>
