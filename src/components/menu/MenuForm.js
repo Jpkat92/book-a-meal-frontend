@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import SelectInput from '../common/forms/selectInput';
 import MealCheckboxList from './MealCheckboxList';
 
-const MenuForm = ({menu, meals, allDays, onCreateMenu, onMealToggle, selectedDay, onSelectDay, creating, errors}) => {
+const MenuForm = ({menu, meals, allDays, onCreateMenu, onMealToggle, selectedDay, onSelectDay, creating, errors, onCancel}) => {
     let day = null;
     if(selectedDay === null){
         day = "Select a day"
@@ -37,7 +37,7 @@ const MenuForm = ({menu, meals, allDays, onCreateMenu, onMealToggle, selectedDay
     }
     
     return (
-        <form>
+        <form id="manageMenu">
             <h1>Manage Daily Menus</h1>
             <SelectInput
                 label="Select a Day"
@@ -55,12 +55,20 @@ const MenuForm = ({menu, meals, allDays, onCreateMenu, onMealToggle, selectedDay
                     onMealToggle={onMealToggle}/>
             </div>
             <br/>
-            <input
-                type="submit"
-                disabled={creating}
-                value={creating ? 'Creating Menu...': 'Create Menu'}
-                className="btn btn-primary btn-sm"
-                onClick={onCreateMenu}/>
+            <div className="btn-toolbar">
+                <input
+                    type="submit"
+                    disabled={creating}
+                    value={creating ? 'Creating Menu...': 'Create Menu'}
+                    className="btn btn-primary btn-sm"
+                    onClick={onCreateMenu}/>
+
+                <input
+                    type="submit"
+                    value='Cancel'
+                    className="btn btn-danger btn-sm"
+                    onClick={onCancel}/>
+            </div>
         </form>
   );
 };
@@ -71,7 +79,7 @@ MenuForm.propTypes = {
   onSave: PropTypes.func.isRequired,
   onCreateMenu: PropTypes.func.isRequired,
   onMealToggle: PropTypes.func.isRequired,
-  selectedDay: PropTypes.object.isRequired,
+  selectedDay: PropTypes.object,
   onSelectDay: PropTypes.func.isRequired,
   creating: PropTypes.bool,
   errors: PropTypes.object
