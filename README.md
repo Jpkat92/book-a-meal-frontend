@@ -39,3 +39,6 @@ Administrators/Caterers can;
 In the project directory, you can run:
 
 * `npm test`
+
+## Deployment
+Check out application via this [link](https://book-a-meal-ui.herokuapp.com/)
