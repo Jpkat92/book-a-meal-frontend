@@ -8,23 +8,8 @@ ShallowWrapper {
     error="Checkbox is not selected"
     id={1}
     name="Rice"
-    onCheckboxChange={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            undefined,
-            1,
-          ],
-        ],
-        "results": Array [
-          Object {
-            "isThrow": false,
-            "value": undefined,
-          },
-        ],
-      }
-    }
-  />,
+    onCheckboxChange={[Function]}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -41,15 +26,16 @@ ShallowWrapper {
       "children": Array [
         <input
           className="form-control"
+          defaultChecked={undefined}
           name="Rice"
           onClick={[Function]}
           type="checkbox"
-        />,
+/>,
         <div
           className="alert alert-danger"
-        >
+>
           Checkbox is not selected
-        </div>,
+</div>,
       ],
       "className": "form-group",
     },
@@ -94,15 +80,16 @@ ShallowWrapper {
         "children": Array [
           <input
             className="form-control"
+            defaultChecked={undefined}
             name="Rice"
             onClick={[Function]}
             type="checkbox"
-          />,
+/>,
           <div
             className="alert alert-danger"
-          >
+>
             Checkbox is not selected
-          </div>,
+</div>,
         ],
         "className": "form-group",
       },

@@ -17,7 +17,7 @@ import CatererDashboardPage from './catererDashboard/CatererDashboardPage';
 import ManageMealPage from './meals/ManageMealPage'
 import ManageMenuPage from './menu/ManageMenuPage'
 import '../css/bootstrap.min.css';
-import '../BookAMeal.css';
+import '../BookAMeal.scss';
 
 class BookAMeal extends Component {
   constructor(props) {

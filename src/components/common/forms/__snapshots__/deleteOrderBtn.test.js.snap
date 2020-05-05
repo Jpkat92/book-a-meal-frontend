@@ -5,20 +5,8 @@ ShallowWrapper {
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <DeleteOrderBtn
     deleting={false}
-    onClickDelete={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": Array [
-          Object {
-            "isThrow": false,
-            "value": undefined,
-          },
-        ],
-      }
-    }
-  />,
+    onClickDelete={[Function]}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -34,17 +22,7 @@ ShallowWrapper {
     "props": Object {
       "className": "btn btn-danger btn-sm",
       "disabled": false,
-      "onClick": [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-        "results": Array [
-          Object {
-            "isThrow": false,
-            "value": undefined,
-          },
-        ],
-      },
+      "onClick": [Function],
       "type": "submit",
       "value": "Delete Order(s)",
     },
@@ -60,17 +38,7 @@ ShallowWrapper {
       "props": Object {
         "className": "btn btn-danger btn-sm",
         "disabled": false,
-        "onClick": [MockFunction] {
-          "calls": Array [
-            Array [],
-          ],
-          "results": Array [
-            Object {
-              "isThrow": false,
-              "value": undefined,
-            },
-          ],
-        },
+        "onClick": [Function],
         "type": "submit",
         "value": "Delete Order(s)",
       },

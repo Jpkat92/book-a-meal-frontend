@@ -6,15 +6,15 @@ ShallowWrapper {
   Symbol(enzyme.__unrendered__): <MenuListRow
     canCheckMeal={false}
     meal={
-      Object {
-        "id": 2,
-        "isChecked": true,
-        "name": "Naan",
-        "price": 12,
-      }
+        Object {
+            "id": 2,
+            "isChecked": true,
+            "name": "Naan",
+            "price": 12,
+          }
     }
-    toggleCheckBoxChange={[MockFunction]}
-  />,
+    toggleCheckBoxChange={[Function]}
+/>,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
     "getNode": [Function],
@@ -31,19 +31,19 @@ ShallowWrapper {
       "children": Array [
         <td>
           <CheckBoxInput
-            id={2}
-            isChecked={true}
-            name="Naan"
-            onCheckboxChange={[MockFunction]}
+                    id={2}
+                    isChecked={true}
+                    name="Naan"
+                    onCheckboxChange={[Function]}
           />
-        </td>,
+</td>,
         <td>
           Naan
-        </td>,
+</td>,
         <td>
           $
           12
-        </td>,
+</td>,
       ],
     },
     "ref": null,
@@ -57,8 +57,8 @@ ShallowWrapper {
             id={2}
             isChecked={true}
             name="Naan"
-            onCheckboxChange={[MockFunction]}
-          />,
+            onCheckboxChange={[Function]}
+/>,
         },
         "ref": null,
         "rendered": Object {
@@ -69,7 +69,7 @@ ShallowWrapper {
             "id": 2,
             "isChecked": true,
             "name": "Naan",
-            "onCheckboxChange": [MockFunction],
+            "onCheckboxChange": [Function],
           },
           "ref": null,
           "rendered": null,
@@ -117,19 +117,19 @@ ShallowWrapper {
         "children": Array [
           <td>
             <CheckBoxInput
-              id={2}
-              isChecked={true}
-              name="Naan"
-              onCheckboxChange={[MockFunction]}
+                        id={2}
+                        isChecked={true}
+                        name="Naan"
+                        onCheckboxChange={[Function]}
             />
-          </td>,
+</td>,
           <td>
             Naan
-          </td>,
+</td>,
           <td>
             $
             12
-          </td>,
+</td>,
         ],
       },
       "ref": null,
@@ -143,8 +143,8 @@ ShallowWrapper {
               id={2}
               isChecked={true}
               name="Naan"
-              onCheckboxChange={[MockFunction]}
-            />,
+              onCheckboxChange={[Function]}
+/>,
           },
           "ref": null,
           "rendered": Object {
@@ -155,7 +155,7 @@ ShallowWrapper {
               "id": 2,
               "isChecked": true,
               "name": "Naan",
-              "onCheckboxChange": [MockFunction],
+              "onCheckboxChange": [Function],
             },
             "ref": null,
             "rendered": null,
